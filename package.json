@@ -1,0 +1,37 @@
+{
+  "name": "esmbot",
+  "version": "1.0.0",
+  "description": "A Discord bot with miscellaneous features",
+  "main": "app.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "author": "Essem <smswessem@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheEssemCraft/esmBot.git"
+  },
+  "dependencies": {
+    "bufferutil": "^3.0.5",
+    "chalk": "^2.4.1",
+    "discord.js": "github:discordjs/discord.js",
+    "dotbeat": "^1.0.2",
+    "enmap": "^2.2.1",
+    "enmap-level": "^2.1.0",
+    "erlpack": "github:discordapp/erlpack",
+    "gm": "^1.23.1",
+    "js-base64": "^2.4.3",
+    "libsodium-wrappers": "^0.7.3",
+    "moment": "^2.22.1",
+    "node-opus": "^0.2.9",
+    "request": "^2.85.0",
+    "uax11": "0.0.3",
+    "uws": "^9.148.0",
+    "zlib-sync": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-promise": "^3.7.0"
+  }
+}
