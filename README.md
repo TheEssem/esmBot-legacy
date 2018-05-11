@@ -1,4 +1,4 @@
-# ![](https://github.com/TheEssemCraft/esmBot/raw/master/esmbot.png?s=200) esmBot
+# <img src="https://github.com/TheEssemCraft/esmBot/raw/master/esmbot.png" width="256"> esmBot
 [![esmServer](https://discordapp.com/api/guilds/433601545855172609/embed.png)](https://discord.gg/jBxxkPZ)
 
 esmBot is an entertainment-focused Discord bot made using [Discord.js](https://discord.js.org/) with soundboard and image manipulation commands.
