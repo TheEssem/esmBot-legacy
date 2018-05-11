@@ -14,6 +14,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       "[moment](https://www.npmjs.com/package/moment)\n" +
       "[enmap](https://www.npmjs.com/package/enmap)\n" +
       "[uax11](https://www.npmjs.com/package/uax11)")
+    .addField("✅ Official Server:", "https://discord.gg/jBxxkPZ")
     .addField("💻 Source Code:", "https://github.com/TheEssemCraft/esmBot");
   message.channel.send(infoEmbed);
 };
