@@ -14,23 +14,19 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       message.channel.startTyping();
       const attachmentsList = messageList[i].attachments.array();
       const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
-      const deviantartWatermark = "./assets/images/deviantartwatermark.png";
       // check if file is an image or not
       if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
         message.channel.stopTyping();
-        return message.reply("you need to upload a PNG or JPG file to add a deviantart watermark!");
+        return message.reply("you need to upload a PNG or JPG file to swirl an image!");
       }
-      gm(request(attachmentsList[0].url)).size((error, size) => {
+      gm(request(attachmentsList[0].url)).swirl(180).stream((error, stdout) => {
         if (error) throw new Error(error);
-        gm(request(attachmentsList[0].url)).composite(deviantartWatermark).gravity("Center").resize(null, size.height).stream((error, stdout) => {
-          if (error) throw new Error(error);
-          message.channel.stopTyping();
-          message.channel.send({
-            files: [{
-              attachment: stdout,
-              name: "deviantart.png"
-            }]
-          });
+        message.channel.stopTyping();
+        message.channel.send({
+          files: [{
+            attachment: stdout,
+            name: "swirl.png"
+          }]
         });
       });
       attachmentFound = true;
@@ -38,6 +34,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }
   }
   if (!attachmentFound) {
-    return message.reply("you need to upload a PNG or JPG file to add a deviantart watermark!");
+    return message.reply("you need to upload a PNG or JPG file to swirl an image!");
   }
 };
