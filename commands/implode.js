@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       // check if file is an image or not
       if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
         message.channel.stopTyping();
-        return message.reply("you need to upload a PNG or JPG file to add a deviantart watermark!");
+        return message.reply("you need to upload a PNG or JPG file to implode an image!");
       }
       gm(request(attachmentsList[0].url)).implode([1]).stream((error, stdout) => {
         if (error) throw new Error(error);
@@ -34,6 +34,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }
   }
   if (!attachmentFound) {
-    return message.reply("you need to upload a PNG or JPG file to add a deviantart watermark!");
+    return message.reply("you need to upload a PNG or JPG file to implode an image!");
   }
 };
