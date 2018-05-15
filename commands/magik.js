@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
         return message.reply("you need to upload a PNG or JPG file to add magik!");
       }
-      const processMessage = await message.channel.send("⚙️ Processing...");
+      const processMessage = await message.channel.send("⚙️ Processing... This might take a while");
       gm(request(attachmentsList[0].url)).size((error, size) => {
         if (error) throw new Error(error);
         gm(request(attachmentsList[0].url)).out("-liquid-rescale", `${size.width * 0.5}x${size.height * 0.5}`).strip().stream((error, stdout) => {
