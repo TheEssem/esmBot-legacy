@@ -15,9 +15,10 @@
   "dependencies": {
     "bufferutil": "^3.0.5",
     "chalk": "^2.4.1",
+    "dblapi.js": "^2.0.1",
     "discord.js": "github:discordjs/discord.js",
     "dotbeat": "^1.0.2",
-    "enmap": "^2.2.1",
+    "enmap": "^2.4.1",
     "enmap-level": "^2.1.0",
     "erlpack": "github:discordapp/erlpack",
     "gm": "^1.23.1",
