@@ -3,6 +3,8 @@
 
 esmBot is an entertainment-focused Discord bot made using [Discord.js](https://discord.js.org/) with soundboard and image manipulation commands.
 
+[![Discord Bots](https://discordbots.org/api/widget/429305856241172480.svg)](https://discordbots.org/bot/429305856241172480)
+
 ## Usage
 You can invite the bot to your server using this link: https://discordapp.com/api/oauth2/authorize?client_id=429305856241172480&permissions=8&scope=bot
 
