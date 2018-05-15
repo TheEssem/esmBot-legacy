@@ -24,14 +24,14 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       gm(request(attachmentsList[0].url)).size({ bufferStream: true }, (error, size) => {
         if (error) throw new Error(error);
         const originalWidth = size.width;
-        gm(request(attachmentsList[0].url)).out(memecenterWatermark).background("#FFFFFF").gravity("East").out("-smush").out("-9").write(`./cache/${fileRawName}memecenter.png`, (error) => {
+        gm(request(attachmentsList[0].url)).out(memecenterWatermark).background("#FFFFFF").gravity("East").out("-smush").out("-9").strip().write(`./cache/${fileRawName}memecenter.png`, (error) => {
           if (error) throw new Error(error);
           gm(`./cache/${fileRawName}memecenter.png`).size({ bufferStream: true }, (error, size) => {
             if (error) throw new Error(error);
             const memecenterWidth = size.width;
             if (originalWidth !== memecenterWidth) {
               const cropWidth = memecenterWidth - originalWidth;
-              gm(`./cache/${fileRawName}memecenter.png`).gravity("West").chop(cropWidth, 0).stream((error, stdoutFixed) => {
+              gm(`./cache/${fileRawName}memecenter.png`).gravity("West").chop(cropWidth, 0).strip().stream((error, stdoutFixed) => {
                 if (error) throw new Error(error);
                 message.channel.stopTyping();
                 message.channel.send({

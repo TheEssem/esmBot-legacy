@@ -37,32 +37,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
           }]
         });
       }
-      /*request({
-        uri: attachmentsList[0].url
-      }).pipe(fs.createWriteStream(`./cache/${attachmentsList[0].file.name}`)).on("close", function() {
-        memeOptions.image = `./cache/${attachmentsList[0].file.name}`;
-        memeOptions.outfile = `./cache/${fileRawName}meme.png`;
-        if (!topText) {
-          message.channel.stopTyping();
-          return message.reply("you need to add a message to generate a meme!");
-        }
-        memeOptions.topText = "";
-        memeOptions.topText = topText.toUpperCase();
-        memeOptions.bottomText = "";
-        if (bottomText) {
-          memeOptions.bottomText = bottomText.toUpperCase();
-        }
-        memeMaker(memeOptions, function(err) {
-          if (err) throw new Error(err);
-          message.channel.stopTyping();
-          message.channel.send({
-            files: [{
-              attachment: memeOptions.outfile,
-              name: "meme.png"
-            }]
-          });
-        });
-      });*/
       attachmentFound = true;
       break;
     }

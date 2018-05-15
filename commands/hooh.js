@@ -20,11 +20,11 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         message.channel.stopTyping();
         return message.reply("you need to upload a PNG or JPG file to mirror it!");
       }
-      gm(request.get(attachmentsList[0].url)).gravity("South").crop(0, "50%").write(`./cache/${fileRawName}hoohcrop.png`, (error) => {
+      gm(request.get(attachmentsList[0].url)).gravity("South").crop(0, "50%").strip().write(`./cache/${fileRawName}hoohcrop.png`, (error) => {
         if (error) throw new Error(error);
-        gm(`./cache/${fileRawName}hoohcrop.png`).flip().write(`./cache/${fileRawName}hoohflip.png`, (error) => {
+        gm(`./cache/${fileRawName}hoohcrop.png`).flip().strip().write(`./cache/${fileRawName}hoohflip.png`, (error) => {
           if (error) throw new Error(error);
-          gm(`./cache/${fileRawName}hoohflip.png`).append(`./cache/${fileRawName}hoohcrop.png`).stream((error, stdoutFinal) => {
+          gm(`./cache/${fileRawName}hoohflip.png`).append(`./cache/${fileRawName}hoohcrop.png`).strip().stream((error, stdoutFinal) => {
             if (error) throw new Error(error);
             message.channel.stopTyping();
             message.channel.send({

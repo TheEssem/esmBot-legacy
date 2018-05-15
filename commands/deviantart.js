@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       }
       gm(request(attachmentsList[0].url)).size((error, size) => {
         if (error) throw new Error(error);
-        gm(request(attachmentsList[0].url)).composite(deviantartWatermark).gravity("Center").resize(null, size.height).stream((error, stdout) => {
+        gm(request(attachmentsList[0].url)).composite(deviantartWatermark).gravity("Center").resize(null, size.height).strip().stream((error, stdout) => {
           if (error) throw new Error(error);
           message.channel.stopTyping();
           message.channel.send({

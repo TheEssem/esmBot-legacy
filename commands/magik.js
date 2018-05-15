@@ -11,22 +11,26 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   let attachmentFound = false;
   for (let i = 0; i < messageList.length; i++) {
     if (messageList[i].attachments.array().length !== 0) {
-      message.channel.startTyping();
       const attachmentsList = messageList[i].attachments.array();
       const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
       // check if file is an image or not
       if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
-        message.channel.stopTyping();
-        return message.reply("you need to upload a PNG or JPG file to add more JPEG!");
+        return message.reply("you need to upload a PNG or JPG file to add magik!");
       }
-      gm(request(attachmentsList[0].url)).quality(1).strip().stream((error, stdout) => {
+      const processMessage = await message.channel.send("⚙️ Processing...");
+      gm(request(attachmentsList[0].url)).size((error, size) => {
         if (error) throw new Error(error);
-        message.channel.stopTyping();
-        message.channel.send({
-          files: [{
-            attachment: stdout,
-            name: "morejpeg.jpg"
-          }]
+        gm(request(attachmentsList[0].url)).out("-liquid-rescale", `${size.width * 0.5}x${size.height * 0.5}`).strip().stream((error, stdout) => {
+          if (error) throw new Error(error);
+          gm(stdout).out("-liquid-rescale", `${size.width * 1.5}x${size.height * 1.5}`).strip().stream(async (error, stdout) => {
+            await message.channel.send({
+              files: [{
+                attachment: stdout,
+                name: "magik.png"
+              }]
+            });
+            processMessage.delete();
+          });
         });
       });
       attachmentFound = true;
@@ -34,6 +38,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }
   }
   if (!attachmentFound) {
-    return message.reply("you need to upload a PNG or JPG file to add more JPEG!");
+    return message.reply("you need to upload a PNG or JPG file to add magik!");
   }
 };

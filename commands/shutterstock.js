@@ -14,19 +14,23 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       message.channel.startTyping();
       const attachmentsList = messageList[i].attachments.array();
       const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
+      const shutterstockWatermark = "./assets/images/shutterstockwatermark.png";
       // check if file is an image or not
       if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
         message.channel.stopTyping();
-        return message.reply("you need to upload a PNG or JPG file to add more JPEG!");
+        return message.reply("you need to upload a PNG or JPG file to add a shutterstock watermark!");
       }
-      gm(request(attachmentsList[0].url)).quality(1).strip().stream((error, stdout) => {
+      gm(request(attachmentsList[0].url)).size((error, size) => {
         if (error) throw new Error(error);
-        message.channel.stopTyping();
-        message.channel.send({
-          files: [{
-            attachment: stdout,
-            name: "morejpeg.jpg"
-          }]
+        gm(request(attachmentsList[0].url)).composite(shutterstockWatermark).gravity("Center").resize(null, size.height).strip().stream((error, stdout) => {
+          if (error) throw new Error(error);
+          message.channel.stopTyping();
+          message.channel.send({
+            files: [{
+              attachment: stdout,
+              name: "shutterstock.png"
+            }]
+          });
         });
       });
       attachmentFound = true;
@@ -34,6 +38,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }
   }
   if (!attachmentFound) {
-    return message.reply("you need to upload a PNG or JPG file to add more JPEG!");
+    return message.reply("you need to upload a PNG or JPG file to add a shutterstock watermark!");
   }
 };
