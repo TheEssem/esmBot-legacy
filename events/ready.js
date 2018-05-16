@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const DBL = require("dblapi.js");
 
 module.exports = async client => {
   // clean the cache
@@ -21,10 +20,4 @@ module.exports = async client => {
     client.user.setActivity(`${client.config.activityMessages.random()} | ${client.config.prefix}help`, { type: "PLAYING" });
     setTimeout(activityChanger, 1800000);
   })();
-
-  // discordbots.org integration
-  const dbl = new DBL(client.config.dblToken, client);
-  setInterval(() => {
-    dbl.postStats(client.guilds.size, client.shard.id, client.shard.count);
-  }, 1800000);
 };

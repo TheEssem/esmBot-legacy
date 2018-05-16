@@ -1,6 +1,7 @@
 {
   "token": "<PUT TOKEN HERE>",
   "prefix": "&",
+  "dblToken": "<PUT DISCORDBOTS.ORG TOKEN HERE",
   "activityMessages": [
     "ebic gamer style",
     "with your sanity",

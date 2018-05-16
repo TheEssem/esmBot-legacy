@@ -6,6 +6,8 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     .setColor(0xFF0000)
     .addField("📝 Credits:", "Bot by **Essem#9261**\n" +
       "Icon by **STEELDOESATHING#1391**")
+    .addField("👥 Total Users:", client.users.size)
+    .addField("💬 Total Servers:", client.guilds.size)
     .addField("⚙️ APIs/Libraries:", "[Discord.js](https://discord.js.org)\n" +
       "[memegen.link](https://memegen.link/)\n" +
       "[base64.js](https://www.npmjs.com/package/js-base64)\n" +

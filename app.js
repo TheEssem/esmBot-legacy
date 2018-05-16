@@ -7,6 +7,7 @@ const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 const EnmapLevel = require("enmap-level");
 const client = new Discord.Client();
+const DBL = require("dblposter");
 
 client.config = require("./config.json");
 // no the bot doesn't track you, this is just for adding color to the logs
@@ -38,6 +39,10 @@ const init = async () => {
 
   // login
   client.login(client.config.token);
+
+  // post info to discordbots.org
+  const dbl = new DBL(client.config.dblToken, client);
+  dbl.bind();
 };
 
 init();
