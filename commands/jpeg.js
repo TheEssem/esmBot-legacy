@@ -19,7 +19,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         message.channel.stopTyping();
         return message.reply("you need to upload a PNG or JPG file to add more JPEG!");
       }
-      gm(request(attachmentsList[0].url)).quality(1).strip().stream((error, stdout) => {
+      gm(request(attachmentsList[0].url)).setFormat("jpg").quality(1).stream((error, stdout) => {
         if (error) throw new Error(error);
         message.channel.stopTyping();
         message.channel.send({
