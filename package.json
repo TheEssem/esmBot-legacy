@@ -28,6 +28,7 @@
     "js-base64": "^2.4.3",
     "libsodium-wrappers": "^0.7.3",
     "moment": "^2.22.1",
+    "moment-duration-format": "^2.2.2",
     "node-opus": "^0.2.9",
     "request": "^2.85.0",
     "uws": "^9.148.0",

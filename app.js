@@ -45,4 +45,4 @@ const init = async () => {
   dbl.bind();
 };
 
-init();
+init().catch(error => { throw new Error(error); });
