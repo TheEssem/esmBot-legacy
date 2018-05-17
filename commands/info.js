@@ -13,6 +13,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       "[base64.js](https://www.npmjs.com/package/js-base64)\n" +
       "[dotbeat](https://www.npmjs.com/package/dotbeat)\n" +
       "[gm](https://www.npmjs.com/package/gm)\n" +
+      "[The Cat API](https://thecatapi.com/)\n" +
+      "[random.dog](https://random.dog/)\n" +
+      "[xml2js](https://www.npmjs.com/package/xml2js)\n" +
       "[moment](https://www.npmjs.com/package/moment)\n" +
       "[enmap](https://www.npmjs.com/package/enmap)\n" +
       "[uax11](https://www.npmjs.com/package/uax11)")
