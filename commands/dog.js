@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send({
       files: [{
         attachment: body.url,
-        name: "cat.png"
+        name: "dog.png"
       }]
     });
   });
