@@ -44,7 +44,7 @@ module.exports = (client) => {
   // `await client.wait(1000);` to "pause" for 1 second
   client.wait = require("util").promisify(setTimeout);
 
-  // `message.channel.getImage();` to get the last uploaded image in a channel
+  // `client.getImage(message);` to get the last uploaded image in a channel
   client.getImage = (message) => {
     // get list of messages in channel
     const messageList = message.channel.messages.sort(function(a, b) {
@@ -65,6 +65,26 @@ module.exports = (client) => {
     }
     if (!attachmentFound) {
       return;
+    }
+  };
+
+  // `client.playSound(sound, message);` to play a sound in voice chat
+  client.playSound = async (sound, message) => {
+    if (message.member.voiceChannel) {
+      const connection = await message.member.voiceChannel.join();
+      const dispatcher = connection.play(require("fs").createReadStream(sound), {
+        type: "ogg/opus"
+      });
+      dispatcher.on("error", () => {
+        message.member.voiceChannel.leave();
+        console.error;
+      });
+      dispatcher.on("finish", () => {
+        dispatcher.destroy();
+        message.member.voiceChannel.leave();
+      });
+    } else {
+      message.channel.send("You need to be in a voice channel first!");
     }
   };
 
