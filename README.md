@@ -25,5 +25,6 @@ npm install
 Finally, fill in the info inside `config.json` and run `app.js`.
 
 ## Credits
+Logo by [The_STEEL_Show](https://twitter.com/The_STEEL_Show).
 Some parts were taken from [Guidebot](https://github.com/AnIdiotsGuide/guidebot).
 All images and sounds are copyright of their respective owners.

@@ -44,6 +44,30 @@ module.exports = (client) => {
   // `await client.wait(1000);` to "pause" for 1 second
   client.wait = require("util").promisify(setTimeout);
 
+  // `message.channel.getImage();` to get the last uploaded image in a channel
+  client.getImage = (message) => {
+    // get list of messages in channel
+    const messageList = message.channel.messages.sort(function(a, b) {
+      return b.createdTimestamp - a.createdTimestamp;
+    }).array();
+    let attachmentFound = false;
+    for (let i = 0; i < messageList.length; i++) {
+      if (messageList[i].attachments.array().length !== 0) {
+        const attachmentsList = messageList[i].attachments.array();
+        const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
+        // check if file is an image or not
+        if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
+          return;
+        }
+        attachmentFound = true;
+        return attachmentsList[0].url;
+      }
+    }
+    if (!attachmentFound) {
+      return;
+    }
+  };
+
   process.on("uncaughtException", (err) => {
     const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
     client.logger.error(`Uncaught Exception: ${errorMsg}`);

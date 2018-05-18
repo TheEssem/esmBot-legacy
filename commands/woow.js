@@ -1,46 +1,28 @@
 const request = require("request");
+const tempy = require("tempy");
 const gm = require("gm").subClass({
   imageMagick: true
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  // get list of messages in channel
-  const messageList = message.channel.messages.sort(function(a, b) {
-    return b.createdTimestamp - a.createdTimestamp;
-  }).array();
-  let attachmentFound = false;
-  for (let i = 0; i < messageList.length; i++) {
-    if (messageList[i].attachments.array().length !== 0) {
-      message.channel.startTyping();
-      const attachmentsList = messageList[i].attachments.array();
-      const fileRawName = attachmentsList[0].file.name.split(".").slice(0)[0];
-      const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
-      // check if file is an image or not
-      if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
-        message.channel.stopTyping();
-        return message.reply("you need to upload a PNG or JPG file to mirror it!");
-      }
-      gm(request.get(attachmentsList[0].url)).gravity("North").crop(0, "50%").strip().write(`./cache/${fileRawName}woowcrop.png`, (error) => {
+  const image = client.getImage(message);
+  const woowCrop = tempy.file({extension: "png"});
+  const woowFlip = tempy.file({extension: "png"});
+  message.channel.startTyping();
+  gm(request.get(image)).gravity("North").crop(0, "50%").strip().write(woowCrop, (error) => {
+    if (error) throw new Error(error);
+    gm(woowCrop).flip().strip().write(woowFlip, (error) => {
+      if (error) throw new Error(error);
+      gm(woowCrop).append(woowFlip).strip().stream((error, stdoutFinal) => {
         if (error) throw new Error(error);
-        gm(`./cache/${fileRawName}woowcrop.png`).flip().strip().write(`./cache/${fileRawName}woowflip.png`, (error) => {
-          if (error) throw new Error(error);
-          gm(`./cache/${fileRawName}woowcrop.png`).append(`./cache/${fileRawName}woowflip.png`).strip().stream((error, stdoutFinal) => {
-            if (error) throw new Error(error);
-            message.channel.stopTyping();
-            message.channel.send({
-              files: [{
-                attachment: stdoutFinal,
-                name: "woow.png"
-              }]
-            });
-          });
+        message.channel.stopTyping();
+        message.channel.send({
+          files: [{
+            attachment: stdoutFinal,
+            name: "woow.png"
+          }]
         });
       });
-      attachmentFound = true;
-      break;
-    }
-  }
-  if (!attachmentFound) {
-    return message.reply("you need to upload a PNG or JPG file to mirror it!");
-  }
+    });
+  });
 };
