@@ -54,13 +54,22 @@ module.exports = (client) => {
     for (let i = 0; i < messageList.length; i++) {
       if (messageList[i].attachments.array().length !== 0) {
         const attachmentsList = messageList[i].attachments.array();
-        const fileExtension = attachmentsList[0].file.name.split(".").slice(-1)[0].toLowerCase();
+        const fileExtension = attachmentsList[0].name.split(".").slice(-1)[0].toLowerCase();
         // check if file is an image or not
         if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
           return;
         }
         attachmentFound = true;
         return attachmentsList[0].url;
+      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].image) {
+        const embedsList = messageList[i].embeds;
+        const fileExtension = embedsList[0].image.url.split(".").slice(-1)[0].toLowerCase();
+        // check if file is an image or not
+        if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
+          return;
+        }
+        attachmentFound = true;
+        return embedsList[0].image.url;
       }
     }
     if (!attachmentFound) {
