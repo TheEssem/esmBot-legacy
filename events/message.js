@@ -10,13 +10,13 @@ module.exports = (client, message) => {
     client.logger.log("[ESM] Reacted to @everyone");
     message.react(client.emojis.get("433628233783836672"));
   }
-  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1) {
-    client.logger.log("[ESM] Reacted to tears of joy emoji");
+  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "425800147008487436" && message.content.indexOf("😂") > -1) {
+    client.logger.log("Reacted to tears of joy emoji");
     message.react("🇽");
     message.react("🇩");
   }
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
-    const generalChannel = client.guilds.get("433601545855172609").channels.get("433711126522494986");
+    const generalChannel = client.guilds.get("425800147008487436").channels.get("425800147579174913");
     if (message.attachments.array().length !== 0) {
       generalChannel.send(message.content, {
         files: [message.attachments.array()[0].url]
