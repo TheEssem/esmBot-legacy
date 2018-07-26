@@ -1,0 +1,21 @@
+const request = require("request");
+
+exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
+  const image = client.getImage(message);
+  if (image !== undefined) {
+    message.channel.startTyping();
+    const imageURI = encodeURI(image);
+    request({ uri: `https://api.qrserver.com/v1/read-qr-code/?fileurl=${imageURI}`, json: true }, (error, response, body) => {
+      if (error) throw new Error(error);
+      if (body[0].symbol[0].error === null) {
+        message.channel.stopTyping();
+        message.channel.send(`\`\`\`\n${body[0].symbol[0].data}\`\`\``);
+      } else {
+        message.channel.stopTyping();
+        message.reply("there was an error while reading the QR code.");
+      }
+    });
+  } else {
+    message.reply("you need to provide a PNG or JPEG file to read a QR code!");
+  }
+};

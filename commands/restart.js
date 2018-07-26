@@ -5,5 +5,7 @@ exports.run = async (client, message, args) => {// eslint-disable-line no-unused
       await client.unloadCommand(cmd);
     });
     process.exit(1);
+  } else {
+    message.reply("only the bot owner can restart esmBot.");
   }
 };

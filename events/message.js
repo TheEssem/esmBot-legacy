@@ -1,22 +1,22 @@
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
   // ignore messages from other bots
   if (message.author.bot) return;
 
   // ignore unrelated messages
-  if (message.content.indexOf(client.config.prefix) !== 0 && message.mentions.everyone !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
+  if (message.content.indexOf(client.config.prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
 
   // esmServer specific stuff
-  if (message.guild.id === "433601545855172609" && message.mentions.everyone === true) {
-    client.logger.log("[ESM] Reacted to @everyone");
+  if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true) {
+    client.logger.log("[ESM] Reacted to ping");
     message.react(client.emojis.get("433628233783836672"));
   }
   if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "425800147008487436" && message.content.indexOf("😂") > -1) {
     client.logger.log("Reacted to tears of joy emoji");
-    message.react("🇽");
-    message.react("🇩");
+    await message.react("🇽");
+    await message.react("🇩");
   }
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
-    const generalChannel = client.guilds.get("425800147008487436").channels.get("425800147579174913");
+    const generalChannel = client.guilds.get("425800147008487436").channels.get("472114639342403584");
     if (message.attachments.array().length !== 0) {
       generalChannel.send(message.content, {
         files: [message.attachments.array()[0].url]
