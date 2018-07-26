@@ -6,8 +6,8 @@ const gm = require("gm").subClass({
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   const image = client.getImage(message);
-  const magikTemp = tempy.file({extension: "png"});
-  const magikOutput = tempy.file({extension: "png"});
+  const magikTemp = tempy.file({ extension: "png" });
+  const magikOutput = tempy.file({ extension: "png" });
   if (image !== undefined) {
     const processMessage = await message.channel.send("⚙️ Processing... This might take a while");
     gm(request(image)).size((error, size) => {
