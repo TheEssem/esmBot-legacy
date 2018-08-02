@@ -16,11 +16,11 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       "[ShibeOnline](http://shibe.online/)" +
       "[The Cat API](https://thecatapi.com/)\n" +
       "[random.dog](https://random.dog/)\n" +
+      "[catfact.ninja](https://catfact.ninja/)\n" +
       "[xml2js](https://www.npmjs.com/package/xml2js)\n" +
       "[moment](https://www.npmjs.com/package/moment)\n" +
       "[qrcode](https://www.npmjs.com/package/qrcode)" +
-      "[goQR](http://goqr.me/)" +
-      "[enmap](https://www.npmjs.com/package/enmap)\n")
+      "[goQR](http://goqr.me/)")
     .addField("✅ Official Server:", "https://discord.gg/jBxxkPZ")
     .addField("💻 Source Code:", "https://github.com/TheEssemCraft/esmBot");
   message.channel.send(infoEmbed);
