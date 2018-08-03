@@ -1,11 +1,12 @@
-const request = require("request");
+/*const request = require("request");
 const tempy = require("tempy");
 const gm = require("gm").subClass({
   imageMagick: true
-});
+});*/
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  message.reply("this command is currently disabled due to arising technical issues.");
+  /*const image = client.getImage(message);
   const magikTemp = tempy.file({ extension: "png" });
   const magikOutput = tempy.file({ extension: "png" });
   if (image !== undefined) {
@@ -28,5 +29,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     });
   } else {
     message.reply("you need to provide a PNG or JPEG file to add some magik!");
-  }
+  }*/
 };

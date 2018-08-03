@@ -12,6 +12,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       .addField("👪 Server:", message.guild.name)
       .addField("💬 Message:", args.join(" "));
     feedbackChannel.send(feedbackEmbed);
+    message.reply("your feedback has been sent!");
   } else {
     message.reply("you need to provide some feedback to send!");
   }
