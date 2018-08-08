@@ -1,5 +1,6 @@
 # <img src="https://github.com/TheEssemCraft/esmBot/raw/master/esmbot.png" width="128"> esmBot
-[![esmServer](https://discordapp.com/api/guilds/433601545855172609/embed.png)](https://discord.gg/jBxxkPZ) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf403b0fe7444011afedbfaa113d247d)](https://www.codacy.com/app/smswessem/esmBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheEssemCraft/esmBot&amp;utm_campaign=Badge_Grade)
+[![esmServer](https://discordapp.com/api/guilds/433601545855172609/embed.png)](https://discord.gg/jBxxkPZ) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf403b0fe7444011afedbfaa113d247d)](https://www.codacy.com/app/smswessem/esmBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheEssemCraft/esmBot&amp;utm_campaign=Badge_Grade) ![GitHub license](https://img.shields.io/github/license/TheEssemCraft/esmBot.svg)
+
 
 esmBot is an entertainment-focused Discord bot made using [Discord.js](https://discord.js.org/) with soundboard and image manipulation commands.
 
