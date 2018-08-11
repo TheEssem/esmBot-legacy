@@ -12,12 +12,19 @@ module.exports = async client => {
     }
   });
 
+  // per-server configs
+  client.guilds.forEach(guild => {
+    if (!client.settings.has(guild.id)) {
+      client.settings.set(guild.id, client.defaults);
+    }
+  });
+
   // hello world
   client.logger.log(`[READY] ${client.user.tag}, ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, "ready");
 
   // bot is gamer confirmed
   (function activityChanger() {
-    client.user.setActivity(`${client.config.activityMessages.random()} | ${client.config.prefix}help`, { type: "PLAYING" });
+    client.user.setActivity(client.config.activityMessages.random(), { type: "PLAYING" });
     setTimeout(activityChanger, 1800000);
   })();
 };

@@ -9,10 +9,15 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       message.channel.send(`🔢 **Did you know?** ${body}`);
     });
   } else {
-    request({ uri: `http://numbersapi.com/${args[0]}` }, (error, response, body) => {
-      if (error) throw new Error(error);
+    if (args[0].match(/^\d+$/)) {
+      request({ uri: `http://numbersapi.com/${args[0]}` }, (error, response, body) => {
+        if (error) throw new Error(error);
+        message.channel.stopTyping();
+        message.channel.send(`🔢 **Did you know?** ${body}`);
+      });
+    } else {
       message.channel.stopTyping();
-      message.channel.send(`🔢 **Did you know?** ${body}`);
-    });
+      message.reply("you need to provide a number!");
+    }
   }
 };
