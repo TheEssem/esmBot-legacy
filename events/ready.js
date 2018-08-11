@@ -24,7 +24,7 @@ module.exports = async client => {
 
   // bot is gamer confirmed
   (function activityChanger() {
-    client.user.setActivity(client.config.activityMessages.random(), { type: "PLAYING" });
+    client.user.setActivity(`${client.config.activityMessages.random()} | @esmBot help`, { type: "PLAYING" });
     setTimeout(activityChanger, 1800000);
   })();
 };
