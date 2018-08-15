@@ -5,7 +5,7 @@ module.exports = async (client, message) => {
   // prefix can be a mention or a set of special characters
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
   const guildConf = client.settings.get(message.guild.id) || client.defaults;
-  const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : guildConf;
+  const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : guildConf.prefix;
 
   // ignore unrelated messages
   if (message.content.indexOf(prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
