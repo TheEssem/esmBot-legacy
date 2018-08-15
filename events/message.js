@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
     client.logger.log("[ESM] Reacted to ping");
     message.react(client.emojis.get("433628233783836672"));
   }
-  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1) {
+  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1) {
     client.logger.log("Reacted to tears of joy emoji");
     await message.react("🇽");
     await message.react("🇩");
