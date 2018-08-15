@@ -2,11 +2,13 @@ module.exports = async (client, message) => {
   // ignore messages from other bots
   if (message.author.bot) return;
 
-  // fallback for getting prefix
+  // prefix can be a mention or a set of special characters
+  const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
   const guildConf = client.settings.get(message.guild.id) || client.defaults;
+  const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : guildConf;
 
   // ignore unrelated messages
-  if (message.content.indexOf(guildConf.prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
+  if (message.content.indexOf(prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
 
   // esmServer specific stuff
   if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true) {
@@ -29,12 +31,8 @@ module.exports = async (client, message) => {
     }
   }
 
-  if (message.content.includes("help") === true && message.mentions.has(client.user) === true) {
-    message.reply(`the command list can be found here: <https://gist.github.com/TheEssemCraft/a0597f9603177a2df1d8398aa8b78729>\nThis server's prefix is \`${guildConf.prefix}\`.`);
-  }
-
   // separate commands and args
-  const args = message.content.slice(guildConf.prefix.length).trim().split(/ +/g);
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
   // check if command exists
