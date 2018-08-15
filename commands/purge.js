@@ -1,4 +1,5 @@
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
+  if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.reply("you need to have the `Manage Messages` permission on this server to purge the chat!");
   if (args.length !== 0 && args[0].match(/^\d+$/)) {
     message.channel.messages.fetch({
       limit: 100,
