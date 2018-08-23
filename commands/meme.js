@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   if (image !== undefined) {
     message.channel.startTyping();
     if (bottomText !== undefined) {
-      const memeOutput = request(`https://memegen.link/custom/${topText.split(" ").join("_")}/${bottomText.split(" ").join("_")}.jpg?alt=${image}&font=impact&watermark=none`);
+      const memeOutput = request(`https://memegen.link/custom/${encodeURI(topText.split(" ").join("_"))}/${encodeURI(bottomText.split(" ").join("_"))}.jpg?alt=${image}&font=impact&watermark=none`);
       message.channel.stopTyping();
       message.channel.send({
         files: [{
@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         }]
       });
     } else {
-      const memeOutput = request(`https://memegen.link/custom/${topText.split(" ").join("_")}.jpg?alt=${image}&font=impact&watermark=none`);
+      const memeOutput = request(`https://memegen.link/custom/${encodeURI(topText.split(" ").join("_"))}.jpg?alt=${image}&font=impact&watermark=none`);
       message.channel.stopTyping();
       message.channel.send({
         files: [{

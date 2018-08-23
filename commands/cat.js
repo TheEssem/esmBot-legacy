@@ -3,7 +3,7 @@ const request = require("request");
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   message.channel.startTyping();
   request({
-    url: "https://api.thecatapi.com/v1/images/search?format=json&size=small&mime_types=jpg,png",
+    url: "https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg,png",
     headers: {
       "x-api-key": client.config.token
     },
