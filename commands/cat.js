@@ -1,19 +1,21 @@
 const request = require("request");
-const parser = require("xml2js");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   message.channel.startTyping();
-  request(`http://thecatapi.com/api/images/get?format=xml&api_key=${client.config.catToken}`, (error, response, body) => {
+  request({
+    url: "https://api.thecatapi.com/v1/images/search?format=json&size=small&mime_types=jpg,png",
+    headers: {
+      "x-api-key": client.config.token
+    },
+    json: true
+  }, (error, response, body) => {
     if (error) throw new Error(error);
-    parser.parseString(body, (error, result) => {
-      if (error) throw new Error(error);
-      message.channel.stopTyping();
-      message.channel.send(`<${result.response.data[0].images[0].image[0].source_url[0]}>`, {
-        files: [{
-          attachment: result.response.data[0].images[0].image[0].url[0],
-          name: "cat.png"
-        }]
-      });
+    message.channel.stopTyping();
+    message.channel.send({
+      files: [{
+        attachment: body[0].url,
+        name: "cat.png"
+      }]
     });
   });
 };

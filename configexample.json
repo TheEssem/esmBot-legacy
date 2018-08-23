@@ -1,8 +1,7 @@
 {
   "token": "<PUT TOKEN HERE>",
-  "prefix": "&",
   "catToken": "<PUT CAT API TOKEN HERE>",
-  "dblToken": "<PUT DISCORDBOTS.ORG TOKEN HERE",
+  "dblToken": "<PUT DISCORDBOTS.ORG TOKEN HERE>",
   "activityMessages": [
     "ebic gamer style",
     "with your sanity",
