@@ -79,18 +79,19 @@ module.exports = (client) => {
 
   // `client.playSound(sound, message);` to play a sound in voice chat
   client.playSound = async (sound, message) => {
-    if (message.member.voiceChannel) {
-      const connection = await message.member.voiceChannel.join();
+    if (message.member.voice.channel) {
+      const voiceChannel = message.member.voice.channel;
+      const connection = await voiceChannel.join();
       const dispatcher = connection.play(require("fs").createReadStream(sound), {
         type: "ogg/opus"
       });
       dispatcher.on("error", () => {
-        message.member.voiceChannel.leave();
+        voiceChannel.leave();
         console.error;
       });
       dispatcher.on("finish", () => {
         dispatcher.destroy();
-        message.member.voiceChannel.leave();
+        voiceChannel.leave();
       });
     } else {
       message.channel.send("You need to be in a voice channel first!");
