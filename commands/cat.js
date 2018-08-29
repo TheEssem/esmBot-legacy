@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   request({
     url: "https://api.thecatapi.com/v1/images/search?format=json&mime_types=jpg,png",
     headers: {
-      "x-api-key": client.config.token
+      "x-api-key": client.config.catToken
     },
     json: true
   }, (error, response, body) => {

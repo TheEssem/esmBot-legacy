@@ -3,9 +3,10 @@ const request = require("request");
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   message.channel.startTyping();
   request({
-    url: "https://www.reddit.com/r/disneyvacation.json",
+    url: "https://hargrimm-wikihow-v1.p.mashape.com/images?count=1",
     headers: {
-      "User-Agent": "linux:io.github.theessemcraft.esmbot:v1.0.0 (by u/TheEssemCraft)"
+      "X-Mashape-Key": client.config.mashapeKey,
+      "Accept": "application/json"
     },
     json: true
   }, (error, response, body) => {
@@ -13,7 +14,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.stopTyping();
     message.channel.send({
       files: [{
-        attachment: body.data.children.random().data.url,
+        attachment: body["1"].replace(/http:\/\/pad\d\.whstatic.com/g, "https://www.wikihow.com"),
         name: "wikihow.png"
       }]
     });

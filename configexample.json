@@ -1,5 +1,6 @@
 {
   "token": "<PUT TOKEN HERE>",
+  "mashapeKey": "<PUT MASHAPE WIKIHOW API KEY HERE>",
   "catToken": "<PUT CAT API TOKEN HERE>",
   "dblToken": "<PUT DISCORDBOTS.ORG TOKEN HERE>",
   "activityMessages": [

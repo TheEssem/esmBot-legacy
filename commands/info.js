@@ -8,13 +8,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       "Icon by **EyeballTheRuby#1391**")
     .addField("👪 Total Users:", client.users.size)
     .addField("💬 Total Servers:", client.guilds.size)
-    .addField("⚙️ APIs/Libraries:", "[Discord.js](https://discord.js.org)\n" +
-      "[memegen.link](https://memegen.link/)\n" +
-      "[base64.js](https://www.npmjs.com/package/js-base64)\n" +
-      "[dotbeat](https://www.npmjs.com/package/dotbeat)\n" +
-      "[gm](https://www.npmjs.com/package/gm)\n" +
-      "[qrcode](https://www.npmjs.com/package/qrcode)\n" +
-      "[goQR](http://goqr.me/)")
     .addField("✅ Official Server:", "https://discord.gg/jBxxkPZ")
     .addField("💻 Source Code:", "https://github.com/TheEssemCraft/esmBot");
   message.channel.send(infoEmbed);

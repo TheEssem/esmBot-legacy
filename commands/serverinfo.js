@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   const serverEmbed = new MessageEmbed()
     .setTitle(message.guild.name)
-    .setThumbnail(message.guild.iconURL())
+    .setThumbnail(message.guild.iconURL({size: 1024}))
     .setColor(0xFF0000)
     .setDescription(`🔢 **ID:** \`${message.guild.id}\`\n` +
     `👤 **Owner:** ${message.guild.owner.user.tag}\n` +
