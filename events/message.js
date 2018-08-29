@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
     await message.react("🇩");
   }
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
-    const generalChannel = client.guilds.get("433601545855172609").channels.get("433601545855172611");
+    const generalChannel = client.guilds.get("322114245632327703").channels.get("322114245632327703");
     if (message.attachments.array().length !== 0) {
       generalChannel.send(message.content, {
         files: [message.attachments.array()[0].url]

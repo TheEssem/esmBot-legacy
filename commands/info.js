@@ -13,9 +13,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       "[base64.js](https://www.npmjs.com/package/js-base64)\n" +
       "[dotbeat](https://www.npmjs.com/package/dotbeat)\n" +
       "[gm](https://www.npmjs.com/package/gm)\n" +
-      "[xml2js](https://www.npmjs.com/package/xml2js)\n" +
-      "[moment](https://www.npmjs.com/package/moment)\n" +
-      "[qrcode](https://www.npmjs.com/package/qrcode)" +
+      "[qrcode](https://www.npmjs.com/package/qrcode)\n" +
       "[goQR](http://goqr.me/)")
     .addField("✅ Official Server:", "https://discord.gg/jBxxkPZ")
     .addField("💻 Source Code:", "https://github.com/TheEssemCraft/esmBot");
