@@ -30,6 +30,7 @@
     "isgd": "^1.1.3",
     "js-base64": "^2.4.8",
     "libsodium-wrappers": "^0.7.3",
+    "local-devices": "^1.1.1",
     "long-url": "^1.0.2",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
