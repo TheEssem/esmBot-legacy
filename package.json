@@ -38,7 +38,6 @@
     "qrcode": "^1.2.2",
     "request": "^2.88.0",
     "tempy": "^0.2.1",
-    "urban-dictionary": "^2.1.2",
     "zlib-sync": "^0.1.4"
   },
   "devDependencies": {
