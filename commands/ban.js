@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  if (!message.member.permissions.has("BAN_MEMBERS")) return message.reply("you need to have the `Ban Members` permission on this server to kick people!");
+  if (!message.member.permissions.has("BAN_MEMBERS")) return message.reply("you need to have the `Ban Members` permission on this server to ban people!");
   const user = message.mentions.users.first();
   if (user) {
     const member = message.guild.member(user);

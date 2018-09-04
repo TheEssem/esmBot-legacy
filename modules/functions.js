@@ -26,13 +26,13 @@ module.exports = (client) => {
   // <String>.toPropercase() returns a proper-cased string such as:
   // "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
   String.prototype.toProperCase = function() {
-    return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   };
 
   // <String>.toFullWidth() returns a fullwidth string such as:
   // "Mary had a little lamb".toFullWidth() returns "Ｍａｒｙ ｈａｄ ａ ｌｉｔｔｌｅ ｌａｍｂ"
   String.prototype.toFullWidth = function() {
-    return this.replace(/[A-Za-z0-9]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);});
+    return this.replace(/[A-Za-z0-9]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) + 0xFEE0); });
   };
 
   // <Array>.random() returns a single random element from an array
@@ -81,6 +81,7 @@ module.exports = (client) => {
   client.playSound = async (sound, message) => {
     if (message.member.voice.channel) {
       const voiceChannel = message.member.voice.channel;
+      message.channel.send("🔊 Playing sound...");
       const connection = await voiceChannel.join();
       const dispatcher = connection.play(require("fs").createReadStream(sound), {
         type: "ogg/opus"
