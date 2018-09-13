@@ -5,7 +5,6 @@ const Discord = require("discord.js");
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
-const EnmapSQLite = require("enmap-sqlite");
 const client = new Discord.Client();
 const DBL = require("dblposter");
 
@@ -15,7 +14,8 @@ client.logger = require("./util/logger");
 require("./modules/functions.js")(client);
 // put commands into collections
 client.commands = new Enmap();
-client.settings = new Enmap({ provider: new EnmapSQLite({ name: "settings" }) });
+client.settings = new Enmap({ name: "settings" });
+client.tags = new Enmap({ name: "tags" });
 client.defaults = {
   prefix: "&"
 };

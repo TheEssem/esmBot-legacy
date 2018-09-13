@@ -1,6 +1,7 @@
 cache/
 data/
 appold.js
+migrate.js
 config.json
 logs
 *.log
