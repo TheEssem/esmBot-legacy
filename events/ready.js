@@ -12,10 +12,13 @@ module.exports = async client => {
     }
   });
 
-  // per-server configs
+  // per-server configs/tags
   client.guilds.forEach(guild => {
     if (!client.settings.has(guild.id)) {
       client.settings.set(guild.id, client.defaults);
+    }
+    if (!client.tags.has(guild.id)) {
+      client.tags.set(guild.id, client.tagDefaults);
     }
   });
 

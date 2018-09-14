@@ -19,6 +19,12 @@ client.tags = new Enmap({ name: "tags" });
 client.defaults = {
   prefix: "&"
 };
+client.tagDefaults = {
+  help: {
+    content: "https://gist.github.com/TheEssemCraft/a0597f9603177a2df1d8398aa8b78729",
+    author: "198198681982205953"
+  }
+};
 
 const init = async () => {
   // load command collection
