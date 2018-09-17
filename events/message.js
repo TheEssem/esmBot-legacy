@@ -1,4 +1,9 @@
 module.exports = async (client, message) => {
+  // requested by saltypepper#1212
+  if (message.author.id === "339614400526942218" && message.content === "Welp, there goes KekBot, my only friend... e.e") {
+    message.channel.send("shut the heck up <@339614400526942218>");
+  }
+
   // ignore messages from other bots
   if (message.author.bot) return;
 

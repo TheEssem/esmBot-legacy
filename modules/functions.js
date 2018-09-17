@@ -61,15 +61,15 @@ module.exports = (client) => {
         }
         attachmentFound = true;
         return attachmentsList[0].url;
-      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].image) {
+      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].thumbnail.url) {
         const embedsList = messageList[i].embeds;
-        const fileExtension = embedsList[0].image.url.split(".").slice(-1)[0].toLowerCase();
+        const fileExtension = embedsList[0].thumbnail.url.split(".").slice(-1)[0].toLowerCase();
         // check if file is an image or not
         if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
           return;
         }
         attachmentFound = true;
-        return embedsList[0].image.url;
+        return embedsList[0].thumbnail.url;
       }
     }
     if (!attachmentFound) {

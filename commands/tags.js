@@ -54,6 +54,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         message.reply("you need to specify the name of the tag!");
       }
       break;
+    case "list":
+      message.channel.send(`\`\`\`\n${Object.keys(client.tags.get(message.guild.id)).join("\n")}\n\`\`\``);
+      break;
     default:
       if (args.length !== 0) {
         if (client.tags.has(message.guild.id, args[0])) {
