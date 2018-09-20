@@ -43,15 +43,6 @@ const init = async () => {
     const eventName = file.split(".")[0];
     const event = require(`./events/${file}`);
     client.on(eventName, event.bind(null, client));
-    const mod = require.cache[require.resolve(`./events/${file}`)];
-    delete require.cache[require.resolve(`./events/${file}`)];
-    for (let i = 0; i < mod.parent.children.length; i++) {
-      if (mod.parent.children[i] === mod) {
-        mod.parent.children.splice(i, 1);
-        break;
-      }
-    }
-
   });
 
   // login

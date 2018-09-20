@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
           message.reply("this tag already exists!");
         } else {
           const tagContent = args.slice(2).join(" ");
-          if (tagContent !== undefined) {
+          if (tagContent.length !== 0 && tagContent !== undefined) {
             client.tags.set(message.guild.id, { content: tagContent, author: message.author.id }, args[1]);
             message.reply(`the tag \`${args[1]}\` has been added!`);
           } else {
@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         if (client.tags.has(message.guild.id, args[1])) {
           if (client.tags.get(message.guild.id, "author", args[1]) === message.author.id || message.author.id === "198198681982205953") {
             const tagContent = args.slice(2).join(" ");
-            if (tagContent !== undefined) {
+            if (tagContent.length !== 0 && tagContent !== undefined) {
               client.tags.set(message.guild.id, tagContent, `${args[1]}.content`);
               message.reply(`the tag \`${args[1]}\` has been edited!`);
             } else {

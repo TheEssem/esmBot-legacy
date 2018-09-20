@@ -1,8 +1,8 @@
 module.exports = (client) => {
   client.loadCommand = (commandName) => {
     try {
-      const props = require(`../commands/${commandName}`);
       client.logger.log(`Loading Command: ${commandName}. 👌`);
+      const props = require(`../commands/${commandName}`);
       if (props.init) {
         props.init(client);
       }
@@ -14,12 +14,18 @@ module.exports = (client) => {
   };
 
   client.unloadCommand = async (commandName) => {
-    if (!commandName) return `The command \`${commandName}\` doesn"t seem to exist. Try again!`;
-
+    if (!commandName) return `The command \`${commandName}\` doesn't seem to exist. Try again!`;
     if (commandName.shutdown) {
       await commandName.shutdown(client);
     }
+    const mod = require.cache[require.resolve(`../commands/${commandName}`)];
     delete require.cache[require.resolve(`../commands/${commandName}.js`)];
+    for (let i = 0; i < mod.parent.children.length; i++) {
+      if (mod.parent.children[i] === mod) {
+        mod.parent.children.splice(i, 1);
+        break;
+      }
+    }
     return false;
   };
 
@@ -44,6 +50,24 @@ module.exports = (client) => {
   // `await client.wait(1000);` to "pause" for 1 second
   client.wait = require("util").promisify(setTimeout);
 
+  // `client.clean(client, text)` to remove pings and tokens
+  client.clean = async (client, text) => {
+    if (text && text.constructor.name == "Promise")
+      text = await text;
+    if (typeof evaled !== "string")
+      text = require("util").inspect(text, {depth: 1});
+
+    text = text
+      .replace(/`/g, `\`${String.fromCharCode(8203)}`)
+      .replace(/@/g, `@${String.fromCharCode(8203)}`)
+      .replace(client.token, "<redacted>")
+      .replace(client.config.mashapeKey, "<redacted>")
+      .replace(client.config.catToken, "<redacted>")
+      .replace(client.config.dblToken, "<redacted>");
+
+    return text;
+  };
+
   // `client.getImage(message);` to get the last uploaded image in a channel
   client.getImage = (message) => {
     // get list of messages in channel
@@ -61,7 +85,7 @@ module.exports = (client) => {
         }
         attachmentFound = true;
         return attachmentsList[0].url;
-      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].thumbnail.url) {
+      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].thumbnail) {
         const embedsList = messageList[i].embeds;
         const fileExtension = embedsList[0].thumbnail.url.split(".").slice(-1)[0].toLowerCase();
         // check if file is an image or not
@@ -105,7 +129,7 @@ module.exports = (client) => {
     process.exit(1);
   });
 
-  process.on("unhandledRejection", err => {
+  process.on("unhandledRejection", (err) => {
     client.logger.error(`Unhandled rejection: ${err}`);
   });
 };
