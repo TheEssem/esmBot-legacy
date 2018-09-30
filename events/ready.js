@@ -1,16 +1,16 @@
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
 module.exports = async client => {
   // clean the cache
-  fs.readdir("./cache", (err, files) => {
+  /*fs.readdir("./cache", (err, files) => {
     if (err) throw err;
     for (const file of files) {
       fs.unlink(path.join("./cache", file), err => {
         if (err) throw err;
       });
     }
-  });
+  });*/
 
   // per-server configs/tags
   client.guilds.forEach(guild => {

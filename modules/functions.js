@@ -78,7 +78,7 @@ module.exports = (client) => {
     for (let i = 0; i < messageList.length; i++) {
       if (messageList[i].attachments.array().length !== 0) {
         const attachmentsList = messageList[i].attachments.array();
-        const fileExtension = attachmentsList[0].name.split(".").slice(-1)[0].toLowerCase();
+        const fileExtension = attachmentsList[0].name.split(".").slice(-1)[0].toLowerCase().split("?")[0];
         // check if file is an image or not
         if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
           return;
