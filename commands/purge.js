@@ -1,5 +1,6 @@
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.reply("you need to have the `Manage Messages` permission on this server to purge the chat!");
+  if (!message.guild.me.permissions.has("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) return message.reply("I don't have the `Manage Messages` permission!");
   if (args.length !== 0 && args[0].match(/^\d+$/)) {
     message.channel.messages.fetch({
       limit: 100,

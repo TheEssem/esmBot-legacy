@@ -30,3 +30,4 @@ typings/
 .env
 .next
 .ftpconfig
+coverage.lcov
