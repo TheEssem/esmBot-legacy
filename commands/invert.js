@@ -4,7 +4,10 @@ const gm = require("gm").subClass({
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to invert!");
+    console.log(error);
+  });
   if (image !== undefined) {
     message.channel.startTyping();
     gm(request(image)).negative().stream((error, stdout) => {
@@ -17,7 +20,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         }]
       });
     });
-  } else {
-    message.reply("you need to provide a PNG or JPEG file to invert it!");
   }
 };

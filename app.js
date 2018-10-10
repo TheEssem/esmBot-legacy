@@ -10,7 +10,7 @@ const DBL = require("dblposter");
 
 client.config = require("./config.json");
 // no the bot doesn't track you, this is just for adding color to the logs
-client.logger = require("./util/logger");
+client.logger = require("./modules/logger");
 require("./modules/functions.js")(client);
 // put commands into collections
 client.commands = new Enmap();

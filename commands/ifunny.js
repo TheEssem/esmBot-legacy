@@ -4,7 +4,10 @@ const gm = require("gm").subClass({
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to add an iFunny watermark!");
+    console.log(error);
+  });
   if (image !== undefined) {
     message.channel.startTyping();
     const ifunnyWatermark = "./assets/images/ifunnywatermark.png";
@@ -21,7 +24,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         });
       });
     });
-  } else {
-    message.reply("you need to provide a PNG or JPEG file to add an iFunny watermark!");
   }
 };

@@ -1,3 +1,6 @@
+const request = require("request-promise-native").defaults({ encoding: null });
+const imageCheck = require("image-type");
+
 module.exports = (client) => {
   client.loadCommand = (commandName) => {
     try {
@@ -55,7 +58,7 @@ module.exports = (client) => {
     if (text && text.constructor.name == "Promise")
       text = await text;
     if (typeof evaled !== "string")
-      text = require("util").inspect(text, {depth: 1});
+      text = require("util").inspect(text, { depth: 1 });
 
     text = text
       .replace(/`/g, `\`${String.fromCharCode(8203)}`)
@@ -70,35 +73,37 @@ module.exports = (client) => {
 
   // `client.getImage(message);` to get the last uploaded image in a channel
   client.getImage = (message) => {
-    // get list of messages in channel
-    const messageList = message.channel.messages.sort(function(a, b) {
-      return b.createdTimestamp - a.createdTimestamp;
-    }).array();
-    let attachmentFound = false;
-    for (let i = 0; i < messageList.length; i++) {
-      if (messageList[i].attachments.array().length !== 0) {
-        const attachmentsList = messageList[i].attachments.array();
-        const fileExtension = attachmentsList[0].name.split(".").slice(-1)[0].toLowerCase().split("?")[0];
-        // check if file is an image or not
-        if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
-          return;
+    return new Promise(async (resolve, reject) => {
+      // get list of messages in channel
+      const messageList = message.channel.messages.sort(function(a, b) {
+        return b.createdTimestamp - a.createdTimestamp;
+      }).array();
+      let attachmentFound = false;
+      for (const messageCheck of messageList) {
+        if (messageCheck.attachments.array().length !== 0) {
+          const attachmentsList = messageCheck.attachments.array();
+          // check if file is an image or not
+          const image = await request(attachmentsList[0].url);
+          const imageType = imageCheck(image);
+          if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+            attachmentFound = true;
+            resolve(attachmentsList[0].url);
+          }
+        } else if (messageCheck.embeds.length !== 0 && messageCheck.embeds[0].thumbnail) {
+          const embedsList = messageCheck.embeds;
+          // check if file is an image or not
+          const image = await request(embedsList[0].thumbnail.url);
+          const imageType = imageCheck(image);
+          if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+            attachmentFound = true;
+            resolve(embedsList[0].thumbnail.url);
+          }
         }
-        attachmentFound = true;
-        return attachmentsList[0].url;
-      } else if (messageList[i].embeds.length !== 0 && messageList[i].embeds[0].thumbnail) {
-        const embedsList = messageList[i].embeds;
-        const fileExtension = embedsList[0].thumbnail.url.split(".").slice(-1)[0].toLowerCase();
-        // check if file is an image or not
-        if (fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "jpeg") {
-          return;
-        }
-        attachmentFound = true;
-        return embedsList[0].thumbnail.url;
       }
-    }
-    if (!attachmentFound) {
-      return;
-    }
+      if (!attachmentFound) {
+        reject("Attachment not found");
+      }
+    });
   };
 
   // `client.playSound(sound, message);` to play a sound in voice chat

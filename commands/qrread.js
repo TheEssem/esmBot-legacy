@@ -1,7 +1,10 @@
 const request = require("request");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to read a QR code!");
+    console.log(error);
+  });
   if (image !== undefined) {
     message.channel.startTyping();
     const imageURI = encodeURI(image);
@@ -15,7 +18,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         message.reply("there was an error while reading the QR code.");
       }
     });
-  } else {
-    message.reply("you need to provide a PNG or JPEG file to read a QR code!");
   }
 };

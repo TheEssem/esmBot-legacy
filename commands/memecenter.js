@@ -5,7 +5,10 @@ const gm = require("gm").subClass({
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to add a MemeCenter watermark!");
+    console.log(error);
+  });
   const memecenterOutput = tempy.file({extension: "png"});
   if (image !== undefined) {
     message.channel.startTyping();
@@ -43,6 +46,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       });
     });
   } else {
-    message.reply("you need to provide a PNG or JPEG file to add a MemeCenter watermark!");
+    message.reply("you need to provide an image to add a MemeCenter watermark!");
   }
 };

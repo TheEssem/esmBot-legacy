@@ -4,7 +4,10 @@ const gm = require("gm").subClass({
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to add more JPEG!");
+    console.log(error);
+  });
   if (image !== undefined) {
     message.channel.startTyping();
     gm(request(image)).setFormat("jpg").quality(1).stream((error, stdout) => {
@@ -17,7 +20,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         }]
       });
     });
-  } else {
-    message.reply("you need to provide a PNG or JPEG file to add more JPEG!");
   }
 };

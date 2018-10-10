@@ -1,7 +1,10 @@
 const request = require("request").defaults({ encoding: null });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to generate a meme!");
+    console.log(error);
+  });
   if (args.length !== 0) {
     const [topText, bottomText] = args.join(" ").split(",").map(elem => elem.trim());
     if (image !== undefined) {
@@ -25,8 +28,6 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
           }]
         });
       }
-    } else {
-      message.reply("you need to provide a PNG or JPEG file to generate a meme!");
     }
   } else {
     message.reply("you need to provide some text to generate a meme!");

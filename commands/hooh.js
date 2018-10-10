@@ -5,7 +5,10 @@ const gm = require("gm").subClass({
 });
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = client.getImage(message);
+  const image = await client.getImage(message).catch(error => {
+    message.reply("you need to provide an image to mirror!");
+    console.log(error);
+  });
   const hoohCrop = tempy.file({extension: "png"});
   const hoohFlip = tempy.file({extension: "png"});
   if (image !== undefined) {
@@ -26,7 +29,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         });
       });
     });
-  } else {
-    message.reply("you need to provide a PNG or JPEG file to mirror!");
   }
 };
