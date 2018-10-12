@@ -53,7 +53,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   if (args.length === 0) {
     message.reply("you need to provide some text for the cow to say!");
   } else if (cowList.indexOf(args[0]) > -1) {
-    const cow = args.shift(); // eslint-disable-line no-unused-vars
+    const cow = args.shift();
     message.channel.send(`\`\`\`\n${cowsay.say({
       text: args.join(" "),
       f: cow

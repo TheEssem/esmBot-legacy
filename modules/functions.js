@@ -84,19 +84,30 @@ module.exports = (client) => {
           const attachmentsList = messageCheck.attachments.array();
           // check if file is an image or not
           const image = await request(attachmentsList[0].url);
-          const imageType = imageCheck(image);
+          const imageType = await imageCheck(image);
           if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
             attachmentFound = true;
             resolve(attachmentsList[0].url);
           }
-        } else if (messageCheck.embeds.length !== 0 && messageCheck.embeds[0].thumbnail) {
-          const embedsList = messageCheck.embeds;
-          // check if file is an image or not
-          const image = await request(embedsList[0].thumbnail.url);
-          const imageType = imageCheck(image);
-          if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
-            attachmentFound = true;
-            resolve(embedsList[0].thumbnail.url);
+        } else if (messageCheck.embeds.length !== 0) {
+          if (messageCheck.embeds[0].thumbnail) {
+            const embedsList = messageCheck.embeds;
+            // check if file is an image or not
+            const image = await request(embedsList[0].thumbnail.url);
+            const imageType = imageCheck(image);
+            if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+              attachmentFound = true;
+              resolve(embedsList[0].thumbnail.url);
+            }
+          } else if (messageCheck.embeds[0].image) {
+            const embedsList = messageCheck.embeds;
+            // check if file is an image or not
+            const image = await request(embedsList[0].image.url);
+            const imageType = imageCheck(image);
+            if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+              attachmentFound = true;
+              resolve(embedsList[0].image.url);
+            }
           }
         }
       }

@@ -14,13 +14,16 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   const magikTemp = tempy.file({ extension: "png" });
   const magikOutput = tempy.file({ extension: "png" });
   if (image !== undefined) {
-    const processMessage = await message.channel.send(`${client.emojis.get("479351417102925854")} Processing... This might take a while`);
+    const processMessage = await message.channel.send(`${client.emojis.get("393852367751086090")} Processing... This might take a while`);
     gm(request(image)).resize(800, 800).strip().write(magikResize, (error) => {
       if (error) throw new Error(error);
+      console.log("Magik: Part 1 finished");
       gm(magikResize).out("-liquid-rescale", "400x400").strip().write(magikTemp, (error) => {
         if (error) throw new Error(error);
+        console.log("Magik: Part 2 finished");
         gm(magikTemp).out("-liquid-rescale", "1200x1200").strip().write(magikOutput, async (error) => {
           if (error) throw new Error(error);
+          console.log("Magik: Part 3 finished");
           await message.channel.send({
             files: [{
               attachment: magikOutput,

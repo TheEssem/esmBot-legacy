@@ -7,6 +7,9 @@ module.exports = async (client, message) => {
   // ignore messages from other bots
   if (message.author.bot) return;
 
+  // esmBot is scared of DMs
+  if (!message.guild) return;
+
   // prefix can be a mention or a set of special characters
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
   const guildConf = client.settings.get(message.guild.id) || client.defaults;
@@ -43,10 +46,6 @@ module.exports = async (client, message) => {
   // check if command exists
   const cmd = client.commands.get(`${command}.js`);
   if (!cmd) return;
-
-  // esmBot is scared of dms
-  if (!message.guild)
-    return message.channel.send("Sorry, but esmBot is not compatible with DMs. Please use me on a server instead.");
 
   // actually run the command
   client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);

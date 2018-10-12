@@ -40,6 +40,7 @@
     "qrcode": "^1.2.2",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
+    "retrotext": "git+https://git@github.com/TheEssemCraft/retrotext.git",
     "tempy": "^0.2.1",
     "word-wrap": "^1.2.3",
     "zlib-sync": "^0.1.4"
