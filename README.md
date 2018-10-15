@@ -7,7 +7,7 @@ esmBot is an entertainment-focused Discord bot made using [Discord.js](https://d
 [![Discord Bots](https://discordbots.org/api/widget/429305856241172480.svg)](https://discordbots.org/bot/429305856241172480)
 
 ## Usage
-You can invite the bot to your server using this link: https://discordapp.com/api/oauth2/authorize?client_id=429305856241172480&permissions=8&scope=bot
+You can invite the bot to your server using this link: https://discordapp.com/oauth2/authorize?client_id=429305856241172480&scope=bot&permissions=70642766
 
 A command list can be found [here](https://gist.github.com/TheEssemCraft/a0597f9603177a2df1d8398aa8b78729).
 
