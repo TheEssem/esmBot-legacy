@@ -19,3 +19,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     });
   });
 };
+
+exports.aliases = ["kitters", "kitties", "kitty", "cattos", "catto", "cats"];

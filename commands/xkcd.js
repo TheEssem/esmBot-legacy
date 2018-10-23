@@ -39,3 +39,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }
   }
 };
+
+exports.aliases = [];

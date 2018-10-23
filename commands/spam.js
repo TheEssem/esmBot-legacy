@@ -5,3 +5,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to specify what you want to spam!");
   }
 };
+
+exports.aliases = [];

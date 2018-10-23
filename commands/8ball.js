@@ -23,3 +23,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   ];
   message.channel.send(`🎱 ${responses.random()}`);
 };
+
+exports.aliases = ["magicball", "magikball", "magic8ball", "magik8ball", "eightball"];

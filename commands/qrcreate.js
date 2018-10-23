@@ -20,3 +20,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to provide some text to generate a QR code!");
   }
 };
+
+exports.aliases = [];

@@ -4,3 +4,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   const b64Decoded = base64.decode(args.join(" "));
   message.channel.send(`\`\`\`\n${b64Decoded}\`\`\``);
 };
+
+exports.aliases = ["b64decode", "base64decode"];

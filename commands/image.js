@@ -34,3 +34,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     }).catch(error => { throw new Error(error); });
   }
 };
+
+exports.aliases = ["im", "photo", "img"];

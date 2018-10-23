@@ -49,3 +49,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to provide an image to add a MemeCenter watermark!");
   }
 };
+
+exports.aliases = ["memec", "mcenter"];

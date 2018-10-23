@@ -6,3 +6,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send(fullwidthText);
   }
 };
+
+exports.aliases = ["aesthetic", "aesthetics", "aes"];

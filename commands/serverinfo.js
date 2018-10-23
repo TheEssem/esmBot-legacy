@@ -14,3 +14,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     `😃 **Emojis:** ${message.guild.emojis.map(e => e).join("")}`);
   message.channel.send(serverEmbed);
 };
+
+exports.aliases = ["server"];

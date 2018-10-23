@@ -12,8 +12,9 @@ client.config = require("./config.json");
 // no the bot doesn't track you, this is just for adding color to the logs
 client.logger = require("./modules/logger");
 require("./modules/functions.js")(client);
-// put commands into collections
+// put commands and stuff into collections
 client.commands = new Enmap();
+client.aliases = new Enmap();
 client.settings = new Enmap({ name: "settings" });
 client.tags = new Enmap({ name: "tags" });
 client.defaults = {

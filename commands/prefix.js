@@ -7,3 +7,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     return message.reply("you need to provide what you want the prefix to be!");
   }
 };
+
+exports.aliases = ["setprefix", "changeprefix", "checkprefix"];

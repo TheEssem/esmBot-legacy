@@ -10,6 +10,9 @@ module.exports = (client) => {
         props.init(client);
       }
       client.commands.set(commandName, props);
+      props.aliases.forEach(alias => {
+        client.aliases.set(alias, commandName);
+      });
       return false;
     } catch (e) {
       return `Unable to load command ${commandName}: ${e}`;
@@ -17,9 +20,15 @@ module.exports = (client) => {
   };
 
   client.unloadCommand = async (commandName) => {
-    if (!commandName) return `The command \`${commandName}\` doesn't seem to exist. Try again!`;
-    if (commandName.shutdown) {
-      await commandName.shutdown(client);
+    let command;
+    if (client.commands.has(commandName)) {
+      command = client.commands.get(commandName);
+    } else if (client.aliases.has(commandName)) {
+      command = client.commands.get(client.aliases.get(commandName));
+    }
+    if (!command) return `The command \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
+    if (command.shutdown) {
+      await command.shutdown(client);
     }
     const mod = require.cache[require.resolve(`../commands/${commandName}`)];
     delete require.cache[require.resolve(`../commands/${commandName}.js`)];

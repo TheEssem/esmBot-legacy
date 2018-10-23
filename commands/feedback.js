@@ -17,3 +17,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to provide some feedback to send!");
   }
 };
+
+exports.aliases = ["request", "report", "complain", "compliment"];

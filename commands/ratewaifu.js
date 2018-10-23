@@ -21,3 +21,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   }
   message.channel.send(`I give ${args.join(" ")} a ${finalscore}/10. ${suggestion}`);
 };
+
+exports.aliases = ["gf", "waifu"];

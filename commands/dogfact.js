@@ -8,3 +8,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send(`🐶 **Did you know?** ${body.facts[0]}`);
   });
 };
+
+exports.aliases = ["pupfact"];

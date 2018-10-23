@@ -9,3 +9,5 @@ exports.run = async (client, message, args) => {// eslint-disable-line no-unused
     message.reply("only the bot owner can restart esmBot!");
   }
 };
+
+exports.aliases = ["reboot"];

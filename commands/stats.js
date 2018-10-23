@@ -15,3 +15,5 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
 • Discord.js :: v${version}
 • Node       :: ${process.version}`, {code: "asciidoc"});
 };
+
+exports.aliases = ["botstats"];

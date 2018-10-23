@@ -18,3 +18,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to provide a user to ban!");
   }
 };
+
+exports.aliases = [];

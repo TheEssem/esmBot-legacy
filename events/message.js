@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
   const command = args.shift().toLowerCase();
 
   // check if command exists
-  const cmd = client.commands.get(`${command}.js`);
+  const cmd = client.commands.get(`${command}.js`) || client.commands.get(client.aliases.get(command));
   if (!cmd) return;
 
   // actually run the command

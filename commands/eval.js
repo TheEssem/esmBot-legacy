@@ -9,3 +9,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send(`\`ERROR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
   }
 };
+
+exports.aliases = [];

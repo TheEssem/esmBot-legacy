@@ -29,3 +29,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send(userEmbed);
   }
 };
+
+exports.aliases = ["user"];

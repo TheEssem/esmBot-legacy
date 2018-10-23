@@ -12,3 +12,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     .addField("💻 Source Code:", "https://github.com/TheEssemCraft/esmBot");
   message.channel.send(infoEmbed);
 };
+
+exports.aliases = ["botinfo", "bot", "credits"];

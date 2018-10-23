@@ -11,3 +11,5 @@ exports.run = async (client, message, args) => {// eslint-disable-line no-unused
     message.reply(`the command \`${args[0]}\` has been reloaded.`);
   }
 };
+
+exports.aliases = [];

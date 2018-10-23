@@ -62,3 +62,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.send(`\`\`\`\n${cowsay.say({ text: args.join(" ") })}\n\`\`\``);
   }
 };
+
+exports.aliases = ["cow"];

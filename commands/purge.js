@@ -13,3 +13,5 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.reply("you need to provide the amount of messages to purge!");
   }
 };
+
+exports.aliases = ["prune"];
