@@ -19,6 +19,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         attachment: faceImage,
         name: "hot.png"
       }]
+    }).catch((error) => {
+      console.log("shut the heck up djs lol");
+      console.log(error);
     });
   }
 };
