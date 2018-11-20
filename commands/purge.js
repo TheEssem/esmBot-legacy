@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.messages.fetch({
       limit: 100,
     }).then((messages) => {
-      messages = messages.array().slice(0, args[0]);
+      messages = messages.array().slice(0, args[0] + 1);
       message.channel.bulkDelete(messages);
       return message.channel.send(`Successfully purged ${args[0]} messages.`);
     }).catch(console.error);

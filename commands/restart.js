@@ -10,4 +10,4 @@ exports.run = async (client, message, args) => {// eslint-disable-line no-unused
   }
 };
 
-exports.aliases = ["reboot"];
+exports.aliases = ["reboot", "kys"];

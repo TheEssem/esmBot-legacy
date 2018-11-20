@@ -75,6 +75,8 @@ module.exports = (client) => {
       .replace(client.token, "<redacted>")
       .replace(client.config.mashapeKey, "<redacted>")
       .replace(client.config.catToken, "<redacted>")
+      .replace(client.config.googleKey, "<redacted>")
+      .replace(client.config.cseID, "<redacted>")
       .replace(client.config.dblToken, "<redacted>");
 
     return text;
@@ -93,7 +95,9 @@ module.exports = (client) => {
           const attachmentsList = messageCheck.attachments.array();
           // check if file is an image or not
           const image = await request(attachmentsList[0].url);
-          const imageType = await imageCheck(image);
+          await client.wait(1000);
+          const imageType = imageCheck(image);
+          await client.wait(500);
           if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
             attachmentFound = true;
             resolve(attachmentsList[0].url);
@@ -103,7 +107,9 @@ module.exports = (client) => {
             const embedsList = messageCheck.embeds;
             // check if file is an image or not
             const image = await request(embedsList[0].thumbnail.url);
+            await client.wait(1000);
             const imageType = imageCheck(image);
+            await client.wait(500);
             if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
               attachmentFound = true;
               resolve(embedsList[0].thumbnail.url);
@@ -112,7 +118,9 @@ module.exports = (client) => {
             const embedsList = messageCheck.embeds;
             // check if file is an image or not
             const image = await request(embedsList[0].image.url);
+            await client.wait(1000);
             const imageType = imageCheck(image);
+            await client.wait(500);
             if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
               attachmentFound = true;
               resolve(embedsList[0].image.url);

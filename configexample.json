@@ -2,6 +2,8 @@
   "token": "<PUT TOKEN HERE>",
   "mashapeKey": "<PUT MASHAPE WIKIHOW API KEY HERE>",
   "catToken": "<PUT CAT API TOKEN HERE>",
+  "googleKey": "<PUT GOOGLE API KEY HERE>",
+  "cseID": "<PUT CUSTOM SEARCH ID HERE>",
   "dblToken": "<PUT DISCORDBOTS.ORG TOKEN HERE>",
   "activityMessages": [
     "ebic gamer style",

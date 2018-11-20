@@ -16,18 +16,23 @@ module.exports = async (client, message) => {
   const prefix = message.content.match(prefixMention) ? message.content.match(prefixMention)[0] : guildConf.prefix;
 
   // ignore unrelated messages
-  if (message.content.indexOf(prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
+  if (message.content.indexOf(prefix) !== 0 && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.content.indexOf("^") <= -1 && message.guild.id !== "433408970955423765") return;
 
-  // esmServer specific stuff
+  // esmServer/18's base specific stuff
   if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true || message.guild.id === "322114245632327703" && message.mentions.has(client.user) === true) {
     client.logger.log("[ESM] Reacted to ping");
     message.react(client.emojis.get("433628233783836672"));
   }
-  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1) {
-    client.logger.log("Reacted to tears of joy emoji");
+  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1 || message.guild.id === "484065801322758144" && message.content.indexOf("😂") > -1) {
+    client.logger.log("[ESM] Reacted to tears of joy emoji");
     await message.react("🇽");
     await message.react("🇩");
   }
+  // requested by Ody#6677
+  /*if (message.guild.id === "322114245632327703" && message.content.indexOf("^") > -1) {
+    client.logger.log("[ESM] Reacted to caret");
+    await message.react(client.emojis.get("490628186103611394"));
+  }*/
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
     const generalChannel = client.guilds.get("322114245632327703").channels.get("322114245632327703");
     if (message.attachments.array().length !== 0) {
