@@ -95,7 +95,7 @@ module.exports = (client) => {
           const attachmentsList = messageCheck.attachments.array();
           // check if file is an image or not
           const image = await request(attachmentsList[0].url);
-          await client.wait(1000);
+          // await client.wait(500);
           const imageType = imageCheck(image);
           await client.wait(500);
           if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
@@ -107,7 +107,7 @@ module.exports = (client) => {
             const embedsList = messageCheck.embeds;
             // check if file is an image or not
             const image = await request(embedsList[0].thumbnail.url);
-            await client.wait(1000);
+            // await client.wait(500);
             const imageType = imageCheck(image);
             await client.wait(500);
             if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
@@ -118,7 +118,7 @@ module.exports = (client) => {
             const embedsList = messageCheck.embeds;
             // check if file is an image or not
             const image = await request(embedsList[0].image.url);
-            await client.wait(1000);
+            // await client.wait(500);
             const imageType = imageCheck(image);
             await client.wait(500);
             if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {

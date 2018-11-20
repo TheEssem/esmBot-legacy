@@ -1,7 +1,11 @@
+const { MessageEmbed } = require("discord.js");
+const { Embeds } = require("discord-paginationembed");
+
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   switch (args[0]) {
     case "add":
       if (args[1] !== undefined) {
+        if (args[1] === "list") return message.reply("you can't override the tag list!");
         if (client.tags.has(message.guild.id, args[1])) {
           message.reply("this tag already exists!");
         } else {
@@ -55,7 +59,31 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       }
       break;
     case "list":
-      message.channel.send(`\`\`\`\n${Object.keys(client.tags.get(message.guild.id)).join("\n")}\n\`\`\``);
+      var pageSize = 15;
+      var embeds = [];
+      var groups = Object.keys(client.tags.get(message.guild.id)).map((item, index) => {
+        return index % pageSize === 0 ? Object.keys(client.tags.get(message.guild.id)).slice(index, index + pageSize) : null;
+      }).filter((item) => { return item; });
+      for (const [i, value] of groups.entries()) {
+        embeds.push(new MessageEmbed().setFooter(`Page ${i + 1} of ${groups.length}`).setDescription(value.join("\n")));
+      }
+      new Embeds()
+        .setNavigationEmojis({
+          back: "◀",
+          jump: "🔢",
+          forward: "▶",
+          delete: "🗑"
+        })
+        .showPageIndicator(false)
+        .setAuthorizedUsers([message.author.id])
+        .setChannel(message.channel)
+        .setArray(embeds)
+        .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+        .setPage(1)
+        .setTitle("Tag List")
+        .setColor(0xFF0000)
+        .build();
+      // message.channel.send(`\`\`\`\n${Object.keys(client.tags.get(message.guild.id)).join("\n")}\n\`\`\``);
       break;
     default:
       if (args.length !== 0) {
