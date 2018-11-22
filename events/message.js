@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
   // prefix can be a mention or a set of special characters
   const prefixMention = new RegExp(`^<@!?${client.user.id}> `);
   const guildConf = client.settings.ensure(message.guild.id, client.defaults);
-  const prefix = prefixMention.test(message.content.startsWith()) ? message.content.match(prefixMention)[0] : guildConf.prefix;
+  const prefix = prefixMention.test(message.content) ? message.content.match(prefixMention)[0] : guildConf.prefix;
 
   // ignore unrelated messages
   if (message.content.startsWith(prefix) === false && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
@@ -28,11 +28,6 @@ module.exports = async (client, message) => {
     await message.react("🇽");
     await message.react("🇩");
   }
-  // requested by Ody#6677
-  /*if (message.guild.id === "322114245632327703" && message.content.indexOf("^") > -1) {
-    client.logger.log("[ESM] Reacted to caret");
-    await message.react(client.emojis.get("490628186103611394"));
-  }*/
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
     const generalChannel = client.guilds.get("322114245632327703").channels.get("322114245632327703");
     if (message.attachments.array().length !== 0) {
