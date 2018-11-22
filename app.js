@@ -56,4 +56,14 @@ const init = async () => {
 
 init();
 
+process.on("uncaughtException", (err) => {
+  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
+  client.logger.error(`Uncaught Exception: ${errorMsg}`);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  client.logger.error(`Unhandled rejection: ${err}`);
+});
+
 // .catch(error => { throw new Error(error); });

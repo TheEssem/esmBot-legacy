@@ -82,6 +82,11 @@ module.exports = (client) => {
     return text;
   };
 
+  // `client.regexEscape(string);` to escape characters in a string for use with a regex
+  client.regexEscape = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+  };
+
   // `client.getImage(message);` to get the last uploaded image in a channel
   client.getImage = (message) => {
     return new Promise(async (resolve, reject) => {
