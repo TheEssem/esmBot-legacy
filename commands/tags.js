@@ -59,6 +59,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       }
       break;
     case "list":
+      if (!message.guild.me.permissions.has("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) return message.reply("I don't have the `Manage Messages` permission!");
+      if (!message.guild.me.permissions.has("ADD_REACTIONS") && !message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) return message.reply("I don't have the `Add Reactions` permission!");
+      if (!message.guild.me.permissions.has("EMBED_LINKS") && !message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return message.reply("I don't have the `Embed Links` permission!");
       var pageSize = 15;
       var embeds = [];
       var groups = Object.keys(client.tags.get(message.guild.id)).map((item, index) => {

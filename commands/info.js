@@ -15,4 +15,4 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   message.channel.send(infoEmbed);
 };
 
-exports.aliases = ["botinfo", "bot", "credits"];
+exports.aliases = ["botinfo", "credits"];

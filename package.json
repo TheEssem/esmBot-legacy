@@ -45,6 +45,7 @@
     "request-promise-native": "^1.0.5",
     "retrotext": "github:TheEssemCraft/retrotext",
     "tempy": "^0.2.1",
+    "webshot": "^0.18.0",
     "winston": "^3.1.0",
     "word-wrap": "^1.2.3",
     "zlib-sync": "^0.1.4"
