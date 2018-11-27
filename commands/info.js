@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const dev = client.users.resolve("198198681982205953").tag;
+  const dev = client.users.resolve(client.config.botOwner).tag;
   const artist = client.users.resolve("401980971517214723").tag;
   const infoEmbed = new MessageEmbed()
     .setAuthor("esmBot Info/Credits", "https://cdn.discordapp.com/avatars/429305856241172480/49717613bd5c8302e59f615f5ef70fe5.png")

@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {// eslint-disable-line no-unused-vars
-  if (message.author.id === "198198681982205953") {
+  if (message.author.id === client.config.botOwner) {
     if (!args || args.length < 1) return message.reply("you must provide a command to reload!");
 
     let response = await client.unloadCommand(args[0]);

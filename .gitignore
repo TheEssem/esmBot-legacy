@@ -31,3 +31,4 @@ typings/
 .next
 .ftpconfig
 coverage.lcov
+bannedusers.json

@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 module.exports = async (client, message) => {
   // requested by saltypepper#1212
   if (message.author.id === "339614400526942218" && message.content === "Haha fuck you esmbot, kekbot is offline") {
@@ -19,14 +21,16 @@ module.exports = async (client, message) => {
   if (message.content.startsWith(prefix) === false && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.content.toLowerCase().indexOf("yeah") <= -1 && message.guild.id !== "433408970955423765") return;
 
   // esmServer/18's base specific stuff
-  if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true || message.guild.id === "322114245632327703" && message.mentions.has(client.user) === true) {
-    client.logger.log("[ESM] Reacted to ping");
-    message.react(client.emojis.get("433628233783836672"));
-  }
-  if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1) {
-    client.logger.log("[ESM] Reacted to tears of joy emoji");
-    await message.react("🇽");
-    await message.react("🇩");
+  if (!message.guild.me.permissions.has("ADD_REACTIONS") && !message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) {
+    if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true || message.guild.id === "322114245632327703" && message.mentions.has(client.user) === true) {
+      client.logger.log("[ESM] Reacted to ping");
+      message.react(client.emojis.get("433628233783836672"));
+    }
+    if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1) {
+      client.logger.log("[ESM] Reacted to tears of joy emoji");
+      await message.react("🇽");
+      await message.react("🇩");
+    }
   }
   // requested by hepointatsquib#4622
   /*if (message.content.toLowerCase().indexOf("yeah") > -1 && message.guild.id === "322114245632327703") {
@@ -54,7 +58,15 @@ module.exports = async (client, message) => {
   const cmd = client.commands.get(`${command}.js`) || client.commands.get(client.aliases.get(command));
   if (!cmd) return;
 
-  // actually run the command
-  client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
-  cmd.run(client, message, args);
+  // check is user is banned from using commands
+  fs.readFile("./bannedusers.json", (error, data) => {
+    if (error) throw new Error(error);
+    if (JSON.parse(data).indexOf(message.author.id) > -1) {
+      client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) tried to run the command ${command}, but they are banned!`);
+    } else {
+      // actually run the command
+      client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
+      cmd.run(client, message, args);
+    }
+  });
 };

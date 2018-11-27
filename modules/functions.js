@@ -103,7 +103,7 @@ module.exports = (client) => {
           // await client.wait(500);
           const imageType = imageCheck(image);
           await client.wait(500);
-          if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+          if (["jpg", "png", "webp"].includes(imageType.ext)) {
             attachmentFound = true;
             resolve(attachmentsList[0].url);
           }
@@ -115,7 +115,7 @@ module.exports = (client) => {
             // await client.wait(500);
             const imageType = imageCheck(image);
             await client.wait(500);
-            if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+            if (["jpg", "png", "webp"].includes(imageType.ext)) {
               attachmentFound = true;
               resolve(embedsList[0].thumbnail.url);
             }
@@ -126,7 +126,7 @@ module.exports = (client) => {
             // await client.wait(500);
             const imageType = imageCheck(image);
             await client.wait(500);
-            if (["jpg", "png", "webp", "bmp"].includes(imageType.ext)) {
+            if (["jpg", "png", "webp"].includes(imageType.ext)) {
               attachmentFound = true;
               resolve(embedsList[0].image.url);
             }

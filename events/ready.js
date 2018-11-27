@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 module.exports = async (client) => {
   // per-server configs/tags
   client.guilds.forEach(guild => {
@@ -7,6 +9,13 @@ module.exports = async (client) => {
     if (!client.tags.has(guild.id)) {
       client.tags.set(guild.id, client.tagDefaults);
     }
+  });
+
+  // create list of banned users if it doesn't exist
+  fs.access("bannedusers.json", fs.constants.F_OK, (error) => {
+    if (error) fs.writeFile("bannedusers.json", "[]", "UTF8", (error) => {
+      if (error) throw new Error(error);
+    });
   });
 
   // hello world
