@@ -22,7 +22,7 @@ client.defaults = {
 };
 client.tagDefaults = {
   help: {
-    content: "https://gist.github.com/TheEssemCraft/a0597f9603177a2df1d8398aa8b78729",
+    content: "https://essem.space/esmBot/commands.html",
     author: "198198681982205953"
   }
 };

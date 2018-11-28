@@ -9,7 +9,7 @@ esmBot is an entertainment-focused Discord bot made using [Discord.js](https://d
 ## Usage
 You can invite the bot to your server using this link: https://discordapp.com/oauth2/authorize?client_id=429305856241172480&scope=bot&permissions=70642766
 
-A command list can be found [here](https://gist.github.com/TheEssemCraft/a0597f9603177a2df1d8398aa8b78729).
+A command list can be found [here](https://essem.space/esmBot/commands.html).
 
 If you want to run it locally, you should install ImageMagick and FFmpeg:
 
