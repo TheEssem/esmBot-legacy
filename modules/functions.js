@@ -142,6 +142,7 @@ module.exports = (client) => {
   // `client.playSound(sound, message);` to play a sound in voice chat
   client.playSound = async (sound, message) => {
     if (message.member.voice.channel) {
+      if (!message.guild.me.permissions.has("CONNECT") || !message.member.voice.channel.permissionsFor(message.guild.me).has("CONNECT")) return message.reply("I can't join this voice channel!");
       const voiceChannel = message.member.voice.channel;
       message.channel.send("🔊 Playing sound...");
       const connection = await voiceChannel.join();
