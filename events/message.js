@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
   if (message.content.startsWith(prefix) === false && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.content.toLowerCase().indexOf("yeah") <= -1 && message.guild.id !== "433408970955423765") return;
 
   // esmServer/18's base specific stuff
-  if (!message.guild.me.permissions.has("ADD_REACTIONS") && !message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) {
+  if (message.guild.me.permissions.has("ADD_REACTIONS") && message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) {
     if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true || message.guild.id === "322114245632327703" && message.mentions.has(client.user) === true) {
       client.logger.log("[ESM] Reacted to ping");
       message.react(client.emojis.get("433628233783836672"));
