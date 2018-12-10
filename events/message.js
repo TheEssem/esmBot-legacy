@@ -1,4 +1,5 @@
 const fs = require("fs");
+const tempy = require("tempy");
 
 module.exports = async (client, message) => {
   // requested by saltypepper#1212
@@ -66,7 +67,26 @@ module.exports = async (client, message) => {
     } else {
       // actually run the command
       client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
-      cmd.run(client, message, args);
+      try {
+        cmd.run(client, message, args);
+      }
+      catch (error) {
+        if (error.message.includes("TypeError: Cannot read property 'ext' of null") !== true) {
+          const errorFile = tempy.file({ extension: "txt" });
+          fs.writeFile(errorFile, error.message, (writeError) => {
+            if (error) throw new Error(writeError);
+            message.channel.stopTyping(true);
+            message.channel.send("Uh oh! I ran into an error while running this command. Please report the issue in the attached file here: https://github.com/TheEssemCraft/esmBot/issues", {
+              files: [{
+                attachment: errorFile,
+                name: "error.txt"
+              }]
+            });
+          });
+        } else {
+          console.log("The bot did the thing again lol");
+        }
+      }
     }
   });
 };

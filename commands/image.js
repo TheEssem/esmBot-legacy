@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   } else {
     const embeds = [];
     const imageSearch = new GoogleImages(client.config.cseID, client.config.googleKey);
-    imageSearch.search(args.join(" ")).then(images => {
+    imageSearch.search(args.join(" "), { safe: "high" }).then(images => {
       for (const [i, value] of images.entries()) {
         embeds.push(new MessageEmbed().setFooter(`Page ${i + 1} of ${images.length}`).setImage(value.url));
       }

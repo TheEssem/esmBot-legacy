@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   if (image !== undefined) {
     message.channel.startTyping();
     const downloadedImage = await request({ uri: image, encoding: null });
-    const faceImage = await faceapp.process(downloadedImage, "smile").catch(error => {
+    const faceImage = await faceapp.process(downloadedImage, "smile_3").catch(error => {
       console.log(error);
       return message.reply("I couldn't find a face!");
     });
