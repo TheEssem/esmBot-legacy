@@ -32,3 +32,5 @@ typings/
 .ftpconfig
 coverage.lcov
 bannedusers.json
+sharp
+fisheye

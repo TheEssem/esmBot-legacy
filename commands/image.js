@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 const { Embeds } = require("discord-paginationembed");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  if (!message.guild.me.permissions.has("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) return message.reply("I don't have the `Manage Messages` permission!");
+  // if (!message.guild.me.permissions.has("MANAGE_MESSAGES") && !message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) return message.reply("I don't have the `Manage Messages` permission!");
   if (!message.guild.me.permissions.has("ADD_REACTIONS") && !message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) return message.reply("I don't have the `Add Reactions` permission!");
   if (!message.guild.me.permissions.has("EMBED_LINKS") && !message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return message.reply("I don't have the `Embed Links` permission!");
   if (args.length === 0) {
