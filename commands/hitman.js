@@ -1,8 +1,9 @@
-const request = require("request-promise-native");
-const faceapp = require("faceapp");
+// const request = require("request-promise-native");
+// const faceapp = require("faceapp");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
-  const image = await client.getImage(message).catch(error => {
+  return message.reply("all face commands are currently disabled due to issues with the underlying API.");
+  /*const image = await client.getImage(message).catch(error => {
     message.reply("you need to provide an image with a face to make it look like a hitman!");
     console.log(error);
   });
@@ -23,7 +24,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       console.log("shut the heck up djs lol");
       console.log(error);
     });
-  }
+  }*/
 };
 
 exports.aliases = ["hit"];
