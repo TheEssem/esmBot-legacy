@@ -19,7 +19,7 @@ module.exports = async (client, message) => {
   const prefix = prefixMention.test(message.content) ? message.content.match(prefixMention)[0] : guildConf.prefix;
 
   // ignore unrelated messages
-  if (message.content.startsWith(prefix) === false && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.content.toLowerCase().indexOf("yeah") <= -1 && message.guild.id !== "433408970955423765") return;
+  if (message.content.startsWith(prefix) === false && message.mentions.has(client.user) !== true && message.content.indexOf("😂") <= -1 && message.guild.id !== "433408970955423765") return;
 
   // esmServer/18's base specific stuff
   if (message.guild.me.permissions.has("ADD_REACTIONS") && message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) {
@@ -33,11 +33,6 @@ module.exports = async (client, message) => {
       await message.react("🇩");
     }
   }
-  // requested by hepointatsquib#4622
-  /*if (message.content.toLowerCase().indexOf("yeah") > -1 && message.guild.id === "322114245632327703") {
-    client.logger.log("[ESM] Reacted to yeah");
-    await message.react(client.emojis.get("483102768341712896"));
-  }*/
   if (message.channel.id === "434076900160307212" && message.guild.id === "433408970955423765") {
     const generalChannel = client.guilds.get("322114245632327703").channels.get("322114245632327703");
     if (message.attachments.array().length !== 0) {
@@ -48,6 +43,9 @@ module.exports = async (client, message) => {
       generalChannel.send(message.content);
     }
   }
+
+  // ignore messages without prefix
+  if (message.content.startsWith(prefix) === false) return;
 
   // separate commands and args
   const escapedPrefix = client.regexEscape(prefix);

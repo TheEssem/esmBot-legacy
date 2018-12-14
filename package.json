@@ -38,21 +38,21 @@
     "js-base64": "^2.4.9",
     "libsodium-wrappers": "^0.7.3",
     "long-url": "^1.0.2",
-    "moment": "^2.22.2",
+    "moment": "^2.23.0",
     "moment-duration-format": "^2.2.2",
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
     "qrcode": "^1.3.2",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
-    "retrotext": "github:TheEssemCraft/retrotext",
+    "retrotext": "^3.0.1",
     "tempy": "^0.2.1",
     "word-wrap": "^1.2.3",
     "youtube-search": "^1.1.3",
     "zlib-sync": "^0.1.4"
   },
   "devDependencies": {
-    "eslint": "^5.9.0",
+    "eslint": "^5.10.0",
     "eslint-plugin-promise": "^4.0.1",
     "mocha": "^5.2.0"
   }
