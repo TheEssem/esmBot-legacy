@@ -3,9 +3,10 @@ const tempy = require("tempy");
 
 module.exports = async (client, message) => {
   // requested by saltypepper#1212
-  if (message.author.id === "339614400526942218" && message.content === "Haha fuck you esmbot, kekbot is offline") {
-    message.channel.send("no u <@339614400526942218>");
-  }
+  // rip this part of the code, ezio removed the message from floatzel :(
+  // if (message.author.id === "339614400526942218" && message.content === "Haha fuck you esmbot, kekbot is offline") {
+  //   message.channel.send("no u <@339614400526942218>");
+  // }
 
   // ignore messages from other bots
   if (message.author.bot) return;
@@ -67,8 +68,7 @@ module.exports = async (client, message) => {
       client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
       try {
         cmd.run(client, message, args);
-      }
-      catch (error) {
+      } catch (error) {
         if (error.message.includes("TypeError: Cannot read property 'ext' of null") !== true) {
           const errorFile = tempy.file({ extension: "txt" });
           fs.writeFile(errorFile, error.message, (writeError) => {

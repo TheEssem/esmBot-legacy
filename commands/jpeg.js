@@ -23,4 +23,4 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   }
 };
 
-exports.aliases = ["needsmorejpeg", "jpegify", "magik2", "morejpeg"];
+exports.aliases = ["needsmorejpeg", "jpegify", "magik2", "morejpeg", "jpg"];

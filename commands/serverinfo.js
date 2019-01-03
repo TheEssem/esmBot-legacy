@@ -11,9 +11,8 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         `🗺️ **Region:** ${message.guild.region}\n` +
         `🗓️ **Created on:** \`${message.guild.createdAt}\`\n` +
         `👥 **Users:** ${message.guild.memberCount}\n` +
-        `💬 **Channels:** ${message.guild.channels.size}\n` +
-        `😃 **Emojis:** ${message.guild.emojis.map(e => e).join("")}`);
-    return message.channel.send(serverEmbed);
+        `💬 **Channels:** ${message.guild.channels.size}`);
+    return message.channel.send(`😃 **Emojis:** ${message.guild.emojis.map(e => e).join("").substring(0, 2000)}`, serverEmbed);
   }).catch((error) => { throw new Error(error); });
 };
 

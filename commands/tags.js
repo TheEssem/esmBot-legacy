@@ -22,10 +22,11 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         message.reply("you need to specify the name of the tag!");
       }
       break;
+    case "delete":
     case "remove":
       if (args[1] !== undefined) {
         if (client.tags.has(message.guild.id, args[1])) {
-          if (client.tags.get(message.guild.id, "author", args[1]) === message.author.id || message.author.id === client.config.botOwner) {
+          if (client.tags.get(message.guild.id, args[1]).author === message.author.id || message.author.id === client.config.botOwner) {
             client.tags.delete(message.guild.id, args[1]);
             message.reply(`the tag \`${args[1]}\` has been removed!`);
           } else {
@@ -41,7 +42,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     case "edit":
       if (args[1] !== undefined) {
         if (client.tags.has(message.guild.id, args[1])) {
-          if (client.tags.get(message.guild.id, "author", args[1]) === message.author.id || message.author.id === client.config.botOwner) {
+          if (client.tags.get(message.guild.id, args[1]).author === message.author.id || message.author.id === client.config.botOwner) {
             const tagContent = args.slice(2).join(" ");
             if (tagContent.length !== 0 && tagContent !== undefined) {
               client.tags.set(message.guild.id, tagContent, `${args[1]}.content`);
