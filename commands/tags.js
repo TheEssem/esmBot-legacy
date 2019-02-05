@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     case "remove":
       if (args[1] !== undefined) {
         if (client.tags.has(message.guild.id, args[1])) {
-          if (client.tags.get(message.guild.id, args[1]).author === message.author.id || message.author.id === client.config.botOwner) {
+          if (client.tags.get(message.guild.id, args[1]).author === message.author.id || message.author.id === client.config.botOwner || message.member.permissions.has("MANAGE_MESSAGES")) {
             client.tags.delete(message.guild.id, args[1]);
             message.reply(`the tag \`${args[1]}\` has been removed!`);
           } else {

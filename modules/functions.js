@@ -1,5 +1,5 @@
 const request = require("request-promise-native").defaults({ encoding: null });
-const imageCheck = require("image-type");
+const imageCheck = require("file-type");
 
 module.exports = (client) => {
   client.loadCommand = (commandName) => {
