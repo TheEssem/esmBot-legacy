@@ -7,6 +7,8 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       if (args[1] !== undefined) {
         if (args[1] === "list") return message.reply("you can't override the tag list!");
         if (args[1] === "add") return message.reply("you can't override the ability to add tags!");
+        if (args[1] === "edit") return message.reply("you can't override the ability to edit tags!");
+        if (args[1] === "remove" || args[1] === "delete") return message.reply("you can't override the ability to delete tags!");
         if (client.tags.has(message.guild.id, args[1])) {
           message.reply("this tag already exists!");
         } else {
