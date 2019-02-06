@@ -1,6 +1,6 @@
 const request = require("request");
 const tempy = require("tempy");
-const gm = require("gm").subClass({
+const gm = require("@tohru/gm").subClass({
   imageMagick: true
 });
 

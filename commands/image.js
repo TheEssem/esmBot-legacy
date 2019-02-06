@@ -15,22 +15,26 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       for (const [i, value] of images.entries()) {
         embeds.push(new MessageEmbed().setFooter(`Page ${i + 1} of ${images.length}`).setImage(value.url));
       }
-      return new Embeds()
-        .setNavigationEmojis({
-          back: "◀",
-          jump: "🔢",
-          forward: "▶",
-          delete: "🗑"
-        })
-        .showPageIndicator(false)
-        .setAuthorizedUsers([message.author.id])
-        .setChannel(message.channel)
-        .setArray(embeds)
-        .setAuthor(message.member.displayName, message.author.displayAvatarURL())
-        .setPage(1)
-        .setTitle("Search Results")
-        .setColor(0xFF0000)
-        .build();
+      if (embeds.length != 0) {
+        return new Embeds()
+          .setNavigationEmojis({
+            back: "◀",
+            jump: "🔢",
+            forward: "▶",
+            delete: "🗑"
+          })
+          .showPageIndicator(false)
+          .setAuthorizedUsers([message.author.id])
+          .setChannel(message.channel)
+          .setArray(embeds)
+          .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+          .setPage(1)
+          .setTitle("Search Results")
+          .setColor(0xFF0000)
+          .build();
+      } else {
+        return message.reply("I couldn't find any results!");
+      }
     }).catch(error => { throw new Error(error); });
   }
 };

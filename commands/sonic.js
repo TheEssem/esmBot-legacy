@@ -1,6 +1,6 @@
 const tempy = require("tempy");
 const wrap = require("word-wrap");
-const gm = require("gm").subClass({
+const gm = require("@tohru/gm").subClass({
   imageMagick: true
 });
 

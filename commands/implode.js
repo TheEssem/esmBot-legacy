@@ -1,5 +1,5 @@
 const request = require("request");
-const gm = require("gm").subClass({
+const gm = require("@tohru/gm").subClass({
   imageMagick: true
 });
 
