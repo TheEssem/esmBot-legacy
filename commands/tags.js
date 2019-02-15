@@ -9,6 +9,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         if (args[1] === "add") return message.reply("you can't override the ability to add tags!");
         if (args[1] === "edit") return message.reply("you can't override the ability to edit tags!");
         if (args[1] === "remove" || args[1] === "delete") return message.reply("you can't override the ability to delete tags!");
+        if (args[1] === "random") return message.reply("you can't override the ability to choose a random tag!");
         if (client.tags.has(message.guild.id, args[1])) {
           message.reply("this tag already exists!");
         } else {
@@ -91,6 +92,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
         .setColor(0xFF0000)
         .build();
       // message.channel.send(`\`\`\`\n${Object.keys(client.tags.get(message.guild.id)).join("\n")}\n\`\`\``);
+      break;
+    case "random":
+      message.channel.send(client.tags.get(message.guild.id, Object.keys(client.tags.get(message.guild.id)).random()).content);
       break;
     default:
       if (args.length !== 0) {

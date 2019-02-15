@@ -1,4 +1,4 @@
-const request = require("request-promise-native").defaults({ encoding: null });
+const request = require("request").defaults({ encoding: null });
 const imageCheck = require("file-type");
 
 module.exports = (client) => {
@@ -88,54 +88,38 @@ module.exports = (client) => {
   };
 
   // `client.getImage(message);` to get the last uploaded image in a channel
-  client.getImage = (message) => {
-    return new Promise(async (resolve, reject) => {
-      // get list of messages in channel
-      const messageList = message.channel.messages.sort(function(a, b) {
-        return b.createdTimestamp - a.createdTimestamp;
-      }).array();
-      let attachmentFound = false;
-      for (const messageCheck of messageList) {
-        if (messageCheck.attachments.array().length !== 0) {
-          const attachmentsList = messageCheck.attachments.array();
-          // check if file is an image or not
-          const image = await request(attachmentsList[0].url);
-          // await client.wait(500);
-          const imageType = imageCheck(image);
-          await client.wait(500);
-          if (["jpg", "png", "webp"].includes(imageType.ext)) {
-            attachmentFound = true;
-            resolve(attachmentsList[0].url);
-          }
-        } else if (messageCheck.embeds.length !== 0) {
-          if (messageCheck.embeds[0].thumbnail) {
-            const embedsList = messageCheck.embeds;
-            // check if file is an image or not
-            const image = await request(embedsList[0].thumbnail.url);
-            // await client.wait(500);
-            const imageType = imageCheck(image);
-            await client.wait(500);
-            if (["jpg", "png", "webp"].includes(imageType.ext)) {
-              attachmentFound = true;
-              resolve(embedsList[0].thumbnail.url);
-            }
-          } else if (messageCheck.embeds[0].image) {
-            const embedsList = messageCheck.embeds;
-            // check if file is an image or not
-            const image = await request(embedsList[0].image.url);
-            // await client.wait(500);
-            const imageType = imageCheck(image);
-            await client.wait(500);
-            if (["jpg", "png", "webp"].includes(imageType.ext)) {
-              attachmentFound = true;
-              resolve(embedsList[0].image.url);
-            }
-          }
+  client.getImage = async (message) => {
+    // get list of messages in channel
+    const messageList = message.channel.messages.sort(function(a, b) {
+      return b.createdTimestamp - a.createdTimestamp;
+    }).array();
+    for (const messageCheck of messageList) {
+      if (messageCheck.attachments.array().length !== 0) {
+        const result = await client.fileCheck(messageCheck.attachments.array()[0].url);
+        return result;
+      } else if (messageCheck.embeds.length !== 0) {
+        if (messageCheck.embeds[0].thumbnail) {
+          const result = await client.fileCheck(messageCheck.embeds[0].thumbnail.url);
+          return result;
+        } else if (messageCheck.embeds[0].image) {
+          const result = await client.fileCheck(messageCheck.embeds[0].image.url);
+          return result;
         }
       }
-      if (!attachmentFound) {
-        reject("Attachment not found");
-      }
+    }
+  };
+
+  client.fileCheck = (image) => {
+    return new Promise((resolve, reject) => {
+      request.get(image, (error, response, body) => {
+        if (error) throw new Error(error);
+        const imageType = imageCheck(body);
+        if (["image/jpeg", "image/png", "image/webp"].includes(imageType.mime)) {
+          resolve(image);
+        } else {
+          reject("Attachment not found");
+        }
+      });
     });
   };
 
