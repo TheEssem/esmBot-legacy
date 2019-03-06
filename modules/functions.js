@@ -96,14 +96,20 @@ module.exports = (client) => {
     for (const messageCheck of messageList) {
       if (messageCheck.attachments.array().length !== 0) {
         const result = await client.fileCheck(messageCheck.attachments.array()[0].url);
-        return result;
+        if (result !== "Attachment not found") {
+          return result;
+        }
       } else if (messageCheck.embeds.length !== 0) {
         if (messageCheck.embeds[0].thumbnail) {
           const result = await client.fileCheck(messageCheck.embeds[0].thumbnail.url);
-          return result;
+          if (result !== "Attachment not found") {
+            return result;
+          }
         } else if (messageCheck.embeds[0].image) {
           const result = await client.fileCheck(messageCheck.embeds[0].image.url);
-          return result;
+          if (result !== "Attachment not found") {
+            return result;
+          }
         }
       }
     }
@@ -142,7 +148,7 @@ module.exports = (client) => {
         voiceChannel.leave();
       });
     } else {
-      message.channel.send("You need to be in a voice channel first!");
+      message.reply("you need to be in a voice channel first!");
     }
   };
 

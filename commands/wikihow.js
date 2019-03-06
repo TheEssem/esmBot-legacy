@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     message.channel.stopTyping();
     message.channel.send({
       files: [{
-        attachment: body["1"].replace(/http:\/\/pad\d\.whstatic.com/g, "https://www.wikihow.com"),
+        attachment: body["1"],
         name: "wikihow.png"
       }]
     });
