@@ -120,7 +120,7 @@ module.exports = (client) => {
       request.get(image, (error, response, body) => {
         if (error) throw new Error(error);
         const imageType = imageCheck(body);
-        if (["image/jpeg", "image/png", "image/webp"].includes(imageType.mime)) {
+        if (imageType && ["image/jpeg", "image/png", "image/webp"].includes(imageType.mime)) {
           resolve(image);
         } else {
           reject("Attachment not found");
