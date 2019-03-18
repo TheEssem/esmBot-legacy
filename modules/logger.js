@@ -1,35 +1,20 @@
-const chalk = require("chalk");
 const moment = require("moment");
+const winston = require("winston");
+// const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+    new winston.transports.File({ filename: "main.log" }),
+  ],
+  format: winston.format.printf(log => `[${moment().format("YYYY-MM-DD HH:mm:ss")}]: [${log.level.toUpperCase()}] - ${log.message}`)
+});
+// ${timestamp}
 
-exports.log = (content, type = "log") => {
-  const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
-  switch (type) {
-    case "log": {
-      return console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
-    }
-    case "warn": {
-      return console.log(`${timestamp} ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
-    }
-    case "error": {
-      return console.log(`${timestamp} ${chalk.bgRed(type.toUpperCase())} ${content} `);
-    }
-    case "debug": {
-      return console.log(`${timestamp} ${chalk.green(type.toUpperCase())} ${content} `);
-    }
-    case "cmd": {
-      return console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
-    }
-    case "ready": {
-      return console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
-    }
-    default: throw new TypeError("Logger type must be either warn, debug, log, ready, cmd or error.");
-  }
-};
+exports.log = (type = "info", content) => logger.log(type, content);
 
-exports.error = (...args) => this.log(...args, "error");
+exports.error = (...args) => this.log("error", ...args);
 
-exports.warn = (...args) => this.log(...args, "warn");
+exports.warn = (...args) => this.log("warn", ...args);
 
-exports.debug = (...args) => this.log(...args, "debug");
-
-exports.cmd = (...args) => this.log(...args, "cmd");
+exports.debug = (...args) => this.log("debug", ...args);

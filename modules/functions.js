@@ -4,7 +4,7 @@ const imageCheck = require("file-type");
 module.exports = (client) => {
   client.loadCommand = (commandName) => {
     try {
-      client.logger.log(`Loading Command: ${commandName}. 👌`);
+      client.logger.log("info", `Loading Command: ${commandName}.`);
       const props = require(`../commands/${commandName}`);
       if (props.init) {
         props.init(client);
@@ -154,11 +154,11 @@ module.exports = (client) => {
 
   process.on("uncaughtException", (err) => {
     const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
-    client.logger.error(`Uncaught Exception: ${errorMsg}`);
+    client.logger.log("error", `Uncaught Exception: ${errorMsg}`);
     process.exit(1);
   });
 
   process.on("unhandledRejection", (err) => {
-    client.logger.error(`Unhandled rejection: ${err}`);
+    client.logger.log("error", `Unhandled rejection: ${err}`);
   });
 };

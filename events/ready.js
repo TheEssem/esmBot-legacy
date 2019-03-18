@@ -19,7 +19,7 @@ module.exports = async (client) => {
   });
 
   // hello world
-  client.logger.log(`[READY] ${client.user.tag}, ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, "ready");
+  client.logger.log("info", `[READY] ${client.user.tag}, ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, "ready");
 
   // bot is gamer confirmed
   (function activityChanger() {

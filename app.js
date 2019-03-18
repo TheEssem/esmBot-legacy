@@ -30,7 +30,7 @@ client.tagDefaults = {
 const init = async () => {
   // load command collection
   const cmdFiles = await readdir("./commands/");
-  client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
+  client.logger.log("info", `Loading a total of ${cmdFiles.length} commands.`);
   cmdFiles.forEach(f => {
     if (!f.endsWith(".js")) return;
     const response = client.loadCommand(f);
@@ -39,7 +39,7 @@ const init = async () => {
 
   // load events
   const evtFiles = await readdir("./events/");
-  client.logger.log(`Loading a total of ${evtFiles.length} events.`);
+  client.logger.log("info", `Loading a total of ${evtFiles.length} events.`);
   evtFiles.forEach(file => {
     const eventName = file.split(".")[0];
     const event = require(`./events/${file}`);
@@ -55,15 +55,5 @@ const init = async () => {
 };
 
 init();
-
-process.on("uncaughtException", (err) => {
-  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
-  client.logger.error(`Uncaught Exception: ${errorMsg}`);
-  process.exit(1);
-});
-
-process.on("unhandledRejection", (err) => {
-  client.logger.error(`Unhandled rejection: ${err}`);
-});
 
 // .catch(error => { throw new Error(error); });

@@ -25,11 +25,11 @@ module.exports = async (client, message) => {
   // esmServer/18's base specific stuff
   if (message.guild.me.permissions.has("ADD_REACTIONS") && message.channel.permissionsFor(message.guild.me).has("ADD_REACTIONS")) {
     if (message.guild.id === "433601545855172609" && message.mentions.has(client.user) === true || message.guild.id === "425800147008487436" && message.mentions.has(client.user) === true || message.guild.id === "322114245632327703" && message.mentions.has(client.user) === true) {
-      client.logger.log("[ESM] Reacted to ping");
+      client.logger.log("info", "[ESM] Reacted to ping");
       message.react(client.emojis.get("433628233783836672"));
     }
     if (message.guild.id === "433601545855172609" && message.content.indexOf("😂") > -1 || message.guild.id === "322114245632327703" && message.content.indexOf("😂") > -1) {
-      client.logger.log("[ESM] Reacted to tears of joy emoji");
+      client.logger.log("info", "[ESM] Reacted to tears of joy emoji");
       await message.react("🇽");
       await message.react("🇩");
     }
@@ -62,14 +62,14 @@ module.exports = async (client, message) => {
   fs.readFile("./bannedusers.json", (error, data) => {
     if (error) throw new Error(error);
     if (JSON.parse(data).indexOf(message.author.id) > -1) {
-      client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) tried to run the command ${command}, but they are banned!`);
+      client.logger.log("info", `[CMD] ${message.author.username} (${message.author.id}) tried to run the command ${command}, but they are banned!`);
     } else {
       // actually run the command
-      client.logger.cmd(`[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
+      client.logger.log("info", `[CMD] ${message.author.username} (${message.author.id}) ran command ${command}`);
       try {
         cmd.run(client, message, args);
       } catch (error) {
-        if (error.message.includes("TypeError: Cannot read property 'ext' of null") !== true) {
+        if (error.message.includes("TypeError: Cannot read property 'mime' of null") !== true) {
           const errorFile = tempy.file({ extension: "txt" });
           fs.writeFile(errorFile, error.message, (writeError) => {
             if (error) throw new Error(writeError);
