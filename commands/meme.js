@@ -1,4 +1,5 @@
-const request = require("request").defaults({ encoding: null });
+const request = require("request-promise-native").defaults({ encoding: null });
+const spawn = require("child_process").spawn;
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   const image = await client.getImage(message).catch(error => {
@@ -6,28 +7,34 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
     console.log(error);
   });
   if (args.length !== 0) {
-    const [topText, bottomText] = args.join(" ").split(",").map(elem => elem.trim());
     if (image !== undefined) {
       message.channel.startTyping();
-      if (bottomText !== undefined) {
-        const memeOutput = request(`https://memegen.link/custom/${topText ? encodeURIComponent(topText.split(" ").join("_")) : "_"}/${encodeURIComponent(bottomText.split(" ").join("_"))}.jpg?alt=${encodeURIComponent(image)}&font=impact&watermark=none`);
+      const [topText, bottomText] = args.join(" ").split(",").map(elem => elem.trim());
+      const child = spawn("./meme.sh", [topText.toUpperCase().replace(/\\/g, "\\\\"), bottomText ? bottomText.toUpperCase().replace(/\\/g, "\\\\") : ""]);
+      request(image).then((imageData) => {
+        child.stdin.write(imageData);
+        return child.stdin.end();
+      }).catch(error => { throw new Error(error); });
+      const chunks = [];
+      child.stdout.on("data", (data) => {
+        chunks.push(data);
+      });
+      child.on("error", (error) => {
+        throw new Error(error);
+      });
+      child.stderr.on("data", (error) => {
+        throw new Error(error);
+      });
+      child.stdout.on("close", () => {
+        const data = Buffer.concat(chunks);
         message.channel.stopTyping();
         message.channel.send({
           files: [{
-            attachment: memeOutput,
+            attachment: data,
             name: "meme.png"
           }]
         });
-      } else {
-        const memeOutput = request(`https://memegen.link/custom/${encodeURIComponent(topText.split(" ").join("_"))}.jpg?alt=${encodeURIComponent(image)}&font=impact&watermark=none`);
-        message.channel.stopTyping();
-        message.channel.send({
-          files: [{
-            attachment: memeOutput,
-            name: "meme.png"
-          }]
-        });
-      }
+      });
     }
   } else {
     message.reply("you need to provide some text to generate a meme!");

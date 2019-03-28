@@ -1,6 +1,5 @@
 const moment = require("moment");
 const winston = require("winston");
-// const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
 const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(),
@@ -9,7 +8,6 @@ const logger = winston.createLogger({
   ],
   format: winston.format.printf(log => `[${moment().format("YYYY-MM-DD HH:mm:ss")}]: [${log.level.toUpperCase()}] - ${log.message}`)
 });
-// ${timestamp}
 
 exports.log = (type = "info", content) => logger.log(type, content);
 
