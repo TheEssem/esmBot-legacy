@@ -17,6 +17,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
           if (tagContent.length !== 0 && tagContent !== undefined) {
             client.tags.set(message.guild.id, { content: tagContent, author: message.author.id }, args[1]);
             message.reply(`the tag \`${args[1]}\` has been added!`);
+          } else if (message.attachments.array().length !== 0) {
+            client.tags.set(message.guild.id, { content: message.attachments.array()[0].url, author: message.author.id }, args[1]);
+            message.reply(`the tag \`${args[1]}\` has been added!`);
           } else {
             message.reply("you need to specify the content of the tag!");
           }
@@ -50,6 +53,9 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
             if (tagContent.length !== 0 && tagContent !== undefined) {
               client.tags.set(message.guild.id, tagContent, `${args[1]}.content`);
               message.reply(`the tag \`${args[1]}\` has been edited!`);
+            } else if (message.attachments.array().length !== 0) {
+              client.tags.set(message.guild.id, { content: message.attachments.array()[0].url, author: message.author.id }, args[1]);
+              message.reply(`the tag \`${args[1]}\` has been added!`);
             } else {
               message.reply("you need to specify the content of the tag!");
             }

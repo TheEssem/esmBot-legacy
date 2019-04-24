@@ -4,7 +4,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   const dev = client.users.resolve(client.config.botOwner).tag;
   const artist = client.users.resolve("401980971517214723").tag;
   const infoEmbed = new MessageEmbed()
-    .setAuthor("esmBot Info/Credits", "https://cdn.discordapp.com/avatars/429305856241172480/49717613bd5c8302e59f615f5ef70fe5.png")
+    .setAuthor("esmBot Info/Credits", client.user.avatarURL())
     .setColor(0xFF0000)
     .addField("📝 Credits:", `Bot by **${dev}**\n` +
       `Icon by **${artist}**`)
