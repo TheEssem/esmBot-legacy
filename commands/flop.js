@@ -1,7 +1,5 @@
-const request = require("request");
-const gm = require("@tohru/gm").subClass({
-  imageMagick: true
-});
+const request = require("request-promise-native").defaults({ encoding: null });
+const sharp = require("sharp");
 
 exports.run = async (client, message, args) => { // eslint-disable-line no-unused-vars
   const image = await client.getImage(message).catch(error => {
@@ -10,16 +8,16 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   });
   if (image !== undefined) {
     message.channel.startTyping();
-    gm(request(image)).flop().stream((error, stdout) => {
-      if (error) throw new Error(error);
+    const imageData = await request(image);
+    sharp(imageData).flop().toBuffer().then((data) => {
       message.channel.stopTyping();
-      message.channel.send({
+      return message.channel.send({
         files: [{
-          attachment: stdout,
+          attachment: data,
           name: "flop.png"
         }]
       });
-    });
+    }).catch(error => { throw new Error(error); });
   }
 };
 

@@ -26,10 +26,10 @@
     "discord-paginationembed": "github:TheEssemCraft/discord-paginationembed",
     "discord.js": "github:discordjs/discord.js",
     "dotbeat": "^1.0.2",
-    "enmap": "^4.8.2",
+    "enmap": "^4.8.4",
     "enmap-sqlite": "^2.0.5",
     "erlpack": "github:discordapp/erlpack",
-    "file-type": "^10.10.0",
+    "file-type": "^10.11.0",
     "google-images": "^2.1.0",
     "he": "^1.2.0",
     "is-url": "^1.2.4",
@@ -44,6 +44,7 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "retrotext": "^3.1.0",
+    "sharp": "^0.22.1",
     "tempy": "^0.2.1",
     "winston": "^3.2.1",
     "word-wrap": "^1.2.3",
@@ -52,7 +53,7 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-promise": "^4.1.1",
     "mocha": "^5.2.0"
   }
 }
