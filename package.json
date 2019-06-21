@@ -26,7 +26,7 @@
     "discord-paginationembed": "github:TheEssemCraft/discord-paginationembed",
     "discord.js": "github:discordjs/discord.js",
     "dotbeat": "^1.0.2",
-    "enmap": "^4.8.4",
+    "enmap": "^4.8.5",
     "enmap-sqlite": "^2.0.5",
     "erlpack": "github:discordapp/erlpack",
     "file-type": "^10.11.0",
