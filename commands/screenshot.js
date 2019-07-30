@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
   if (args.length !== 0) {
     message.channel.startTyping();
     const url = isURL(args[0]) ? args[0] : `http://${args[0]}`;
-    const screenshot = request(`https://image.thum.io/get/width/1920/crop/675/noanimate/${url}`);
+    const screenshot = request(`https://image.thum.io/get/width/1920/crop/675/maxAge/1/noanimate/${url}`);
     const screenshotEmbed = new MessageEmbed()
       .setColor(0xFF0000)
       .setTitle(url)

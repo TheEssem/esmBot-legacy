@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => { // eslint-disable-line no-unuse
       `Icon by **${artist}**`)
     .addField("👪 Total Users:", client.users.size)
     .addField("💬 Total Servers:", client.guilds.size)
-    .addField("✅ Official Server:", "https://discord.gg/jBxxkPZ")
+    .addField("✅ Official Server:", "https://discord.gg/vfFM7YT")
     .addField("💻 Source Code:", "https://github.com/TheEssem/esmBot");
   message.channel.send(infoEmbed);
 };

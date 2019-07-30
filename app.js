@@ -1,5 +1,5 @@
-// check if using node 8 or higher
-if (process.version.slice(1).split(".")[0] < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+// check if using node 10 or higher
+if (process.version.slice(1).split(".")[0] < 10) throw new Error("Node 10.0.0 or higher is required. Update Node on your system.");
 
 const Discord = require("discord.js");
 const { promisify } = require("util");

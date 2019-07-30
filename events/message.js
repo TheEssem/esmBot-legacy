@@ -74,7 +74,7 @@ module.exports = async (client, message) => {
           fs.writeFile(errorFile, error.message, (writeError) => {
             if (error) throw new Error(writeError);
             message.channel.stopTyping(true);
-            message.channel.send("Uh oh! I ran into an error while running this command. Please report the issue in the attached file here: https://github.com/TheEssemCraft/esmBot/issues", {
+            message.channel.send("Uh oh! I ran into an error while running this command. Please report the issue in the attached file here: https://github.com/TheEssem/esmBot/issues", {
               files: [{
                 attachment: errorFile,
                 name: "error.txt"
