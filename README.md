@@ -1,3 +1,5 @@
+# Psst! This version of esmBot will be deprecated soon. Further development is happening here: https://github.com/TheEssem/esmBot-rewrite
+
 # <img src="https://github.com/TheEssem/esmBot/raw/master/esmbot.png" width="128"> esmBot
 [![esmBot Support](https://discordapp.com/api/guilds/592399417676529688/embed.png)](https://discord.gg/jBxxkPZ) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf403b0fe7444011afedbfaa113d247d)](https://www.codacy.com/app/smswessem/esmBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheEssem/esmBot&amp;utm_campaign=Badge_Grade) ![GitHub license](https://img.shields.io/github/license/TheEssem/esmBot.svg)
 
